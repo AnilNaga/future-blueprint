@@ -1,4 +1,6 @@
 import { Linkedin, Twitter, Instagram, Youtube } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
 
 const footerLinks = {
   services: [
@@ -29,16 +31,27 @@ const socialLinks = [
 ];
 
 const Footer = () => {
+  const { ref, isInView } = useScrollAnimation({ once: true });
+
   return (
     <footer className="bg-foreground text-background">
-      <div className="container mx-auto px-6 py-16">
+      <motion.div 
+        ref={ref}
+        initial="hidden"
+        animate={isInView ? 'visible' : 'hidden'}
+        variants={staggerContainerVariants}
+        className="container mx-auto px-6 py-16"
+      >
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand */}
-          <div className="lg:col-span-2">
+          <motion.div variants={fadeInUpVariants} className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+              <motion.div 
+                className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+              >
                 <span className="text-primary-foreground font-bold text-lg">JT</span>
-              </div>
+              </motion.div>
               <div>
                 <span className="font-semibold">Jithesh Technologies</span>
                 <p className="text-xs text-background/60">Private Limited</p>
@@ -50,85 +63,101 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
-                <a
+                <motion.a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
                   className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <social.icon size={18} />
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Services */}
-          <div>
+          <motion.div variants={fadeInUpVariants}>
             <h4 className="font-semibold mb-4">Services</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <motion.a
                     href={link.href}
                     className="text-background/70 hover:text-background transition-colors"
+                    whileHover={{ x: 4 }}
                   >
                     {link.name}
-                  </a>
+                  </motion.a>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Company */}
-          <div>
+          <motion.div variants={fadeInUpVariants}>
             <h4 className="font-semibold mb-4">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <motion.a
                     href={link.href}
                     className="text-background/70 hover:text-background transition-colors"
+                    whileHover={{ x: 4 }}
                   >
                     {link.name}
-                  </a>
+                  </motion.a>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Training */}
-          <div>
+          <motion.div variants={fadeInUpVariants}>
             <h4 className="font-semibold mb-4">Training</h4>
             <ul className="space-y-3">
               {footerLinks.training.map((link) => (
                 <li key={link.name}>
-                  <a
+                  <motion.a
                     href={link.href}
                     className="text-background/70 hover:text-background transition-colors"
+                    whileHover={{ x: 4 }}
                   >
                     {link.name}
-                  </a>
+                  </motion.a>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-background/10 flex flex-col md:flex-row items-center justify-between gap-4">
+        <motion.div 
+          variants={fadeInUpVariants}
+          className="pt-8 border-t border-background/10 flex flex-col md:flex-row items-center justify-between gap-4"
+        >
           <p className="text-sm text-background/60">
             © {new Date().getFullYear()} Jithesh Technologies Pvt. Ltd. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-background/60 hover:text-background transition-colors">
+            <motion.a 
+              href="#" 
+              className="text-sm text-background/60 hover:text-background transition-colors"
+              whileHover={{ scale: 1.05 }}
+            >
               Privacy Policy
-            </a>
-            <a href="#" className="text-sm text-background/60 hover:text-background transition-colors">
+            </motion.a>
+            <motion.a 
+              href="#" 
+              className="text-sm text-background/60 hover:text-background transition-colors"
+              whileHover={{ scale: 1.05 }}
+            >
               Terms of Service
-            </a>
+            </motion.a>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </footer>
   );
 };
