@@ -1,4 +1,6 @@
 import { Building, Thermometer, Columns, Layers, Calculator, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
 
 const services = [
   {
@@ -34,35 +36,64 @@ const services = [
 ];
 
 const Services = () => {
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
+
   return (
     <section id="services" className="section section-alt">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <p className="text-sm font-medium text-primary uppercase tracking-widest mb-4">
+        <motion.div 
+          ref={headerRef}
+          initial="hidden"
+          animate={headerInView ? 'visible' : 'hidden'}
+          variants={staggerContainerVariants}
+          className="max-w-3xl mx-auto text-center mb-16"
+        >
+          <motion.p 
+            variants={fadeInUpVariants}
+            className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
+          >
             Our Services
-          </p>
-          <h2 className="text-foreground mb-6">
+          </motion.p>
+          <motion.h2 
+            variants={fadeInUpVariants}
+            className="text-foreground mb-6"
+          >
             Comprehensive BIM Solutions
-          </h2>
-          <p className="text-lg text-muted-foreground">
+          </motion.h2>
+          <motion.p 
+            variants={fadeInUpVariants}
+            className="text-lg text-muted-foreground"
+          >
             End-to-end BIM services for architecture, MEP, and structural engineering projects of any scale.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {services.map((service, index) => (
-            <div
+        <motion.div 
+          ref={gridRef}
+          initial="hidden"
+          animate={gridInView ? 'visible' : 'hidden'}
+          variants={staggerContainerVariants}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+        >
+          {services.map((service) => (
+            <motion.div
               key={service.title}
+              variants={fadeInUpVariants}
+              whileHover={{ y: -8 }}
+              transition={{ duration: 0.3 }}
               className="service-card group"
-              style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="relative z-10">
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
+                <motion.div 
+                  className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-all duration-300"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
                   <service.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
-                </div>
+                </motion.div>
 
                 {/* Content */}
                 <h3 className="text-xl font-semibold text-foreground mb-3">
@@ -85,16 +116,18 @@ const Services = () => {
                 </div>
 
                 {/* Link */}
-                <a
+                <motion.a
                   href="#contact"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-sm font-medium text-primary"
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
                 >
                   Learn more <ArrowRight size={16} />
-                </a>
+                </motion.a>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { MapPin, Phone, Mail, Send, Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants, slideInLeftVariants, slideInRightVariants } from '@/hooks/useScrollAnimation';
 
 const contactInfo = [
   {
@@ -29,11 +31,13 @@ const Contact = () => {
     message: '',
   });
 
+  const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
+  const { ref: contentRef, isInView: contentInView } = useScrollAnimation();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
     
     toast.success('Thank you! We\'ll get back to you soon.');
@@ -49,55 +53,102 @@ const Contact = () => {
     <section id="contact" className="section">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <p className="text-sm font-medium text-primary uppercase tracking-widest mb-4">
+        <motion.div 
+          ref={headerRef}
+          initial="hidden"
+          animate={headerInView ? 'visible' : 'hidden'}
+          variants={staggerContainerVariants}
+          className="max-w-3xl mx-auto text-center mb-16"
+        >
+          <motion.p 
+            variants={fadeInUpVariants}
+            className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
+          >
             Contact Us
-          </p>
-          <h2 className="text-foreground mb-6">
+          </motion.p>
+          <motion.h2 
+            variants={fadeInUpVariants}
+            className="text-foreground mb-6"
+          >
             Let's Build the Future
             <br />
             <span className="gradient-text">Together</span>
-          </h2>
-          <p className="text-lg text-muted-foreground">
+          </motion.h2>
+          <motion.p 
+            variants={fadeInUpVariants}
+            className="text-lg text-muted-foreground"
+          >
             Ready to transform your projects with BIM? Get in touch with our team.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-12 lg:gap-16 max-w-6xl mx-auto">
+        <motion.div 
+          ref={contentRef}
+          initial="hidden"
+          animate={contentInView ? 'visible' : 'hidden'}
+          variants={staggerContainerVariants}
+          className="grid lg:grid-cols-5 gap-12 lg:gap-16 max-w-6xl mx-auto"
+        >
           {/* Contact Info */}
-          <div className="lg:col-span-2 space-y-8">
-            {contactInfo.map((item) => (
-              <div key={item.label} className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+          <motion.div 
+            variants={slideInLeftVariants}
+            className="lg:col-span-2 space-y-8"
+          >
+            {contactInfo.map((item, index) => (
+              <motion.div 
+                key={item.label} 
+                className="flex items-start gap-4"
+                initial={{ opacity: 0, x: -30 }}
+                animate={contentInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.1 * index, duration: 0.5 }}
+              >
+                <motion.div 
+                  className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                >
                   <item.icon className="w-5 h-5 text-primary" />
-                </div>
+                </motion.div>
                 <div>
                   <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
                   <p className="font-medium text-foreground">{item.value}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
 
             {/* Working Hours */}
-            <div className="pt-6 border-t border-border">
+            <motion.div 
+              className="pt-6 border-t border-border"
+              initial={{ opacity: 0 }}
+              animate={contentInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.4, duration: 0.5 }}
+            >
               <h4 className="font-semibold text-foreground mb-3">Working Hours</h4>
               <p className="text-muted-foreground text-sm">
                 Monday - Friday: 9:00 AM - 6:00 PM
                 <br />
                 Saturday: 9:00 AM - 1:00 PM
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="lg:col-span-3">
-            <form onSubmit={handleSubmit} className="glass-card rounded-3xl p-8 md:p-10">
+          <motion.div 
+            variants={slideInRightVariants}
+            className="lg:col-span-3"
+          >
+            <motion.form 
+              onSubmit={handleSubmit} 
+              className="glass-card rounded-3xl p-8 md:p-10"
+              whileHover={{ boxShadow: '0 25px 60px hsl(222 47% 11% / 0.1)' }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="grid sm:grid-cols-2 gap-6 mb-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
                     Full Name
                   </label>
-                  <input
+                  <motion.input
+                    whileFocus={{ scale: 1.01 }}
                     type="text"
                     id="name"
                     name="name"
@@ -112,7 +163,8 @@ const Contact = () => {
                   <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
                     Email Address
                   </label>
-                  <input
+                  <motion.input
+                    whileFocus={{ scale: 1.01 }}
                     type="email"
                     id="email"
                     name="email"
@@ -129,7 +181,8 @@ const Contact = () => {
                 <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
                   Company / Organization
                 </label>
-                <input
+                <motion.input
+                  whileFocus={{ scale: 1.01 }}
                   type="text"
                   id="company"
                   name="company"
@@ -144,7 +197,8 @@ const Contact = () => {
                 <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
                   Message
                 </label>
-                <textarea
+                <motion.textarea
+                  whileFocus={{ scale: 1.01 }}
                   id="message"
                   name="message"
                   value={formData.message}
@@ -156,10 +210,12 @@ const Contact = () => {
                 />
               </div>
 
-              <button
+              <motion.button
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                whileHover={{ y: -4, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {isSubmitting ? (
                   <>
@@ -172,10 +228,10 @@ const Contact = () => {
                     <Send size={18} />
                   </>
                 )}
-              </button>
-            </form>
-          </div>
-        </div>
+              </motion.button>
+            </motion.form>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
