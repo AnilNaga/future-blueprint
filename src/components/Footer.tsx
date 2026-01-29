@@ -1,5 +1,6 @@
 import { Linkedin, Twitter, Instagram, Youtube } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
 
 const footerLinks = {
@@ -12,8 +13,8 @@ const footerLinks = {
   company: [
     { name: 'About Us', href: '#about' },
     { name: 'Projects', href: '#projects' },
-    { name: 'Careers', href: '#contact' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Careers', href: '/careers' },
+    { name: 'Contact', href: '/contact' },
   ],
   training: [
     { name: 'Revit Architecture', href: '#training' },
@@ -34,126 +35,102 @@ const Footer = () => {
   const { ref, isInView } = useScrollAnimation({ once: true });
 
   return (
-    <footer className="bg-foreground text-background">
-      <motion.div 
+    <footer className="bg-[#8846CF] text-white py-24">
+      <motion.div
         ref={ref}
         initial="hidden"
         animate={isInView ? 'visible' : 'hidden'}
         variants={staggerContainerVariants}
-        className="container mx-auto px-6 py-16"
+        className="container mx-auto px-6"
       >
-        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
-          {/* Brand */}
-          <motion.div variants={fadeInUpVariants} className="lg:col-span-2">
-            <div className="flex items-center gap-3 mb-6">
-              <motion.div 
-                className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center"
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-16 mb-20">
+          {/* Brand Area */}
+          <motion.div variants={fadeInUpVariants} className="lg:col-span-2 mb-12 lg:mb-0">
+            <div className="flex items-center gap-4 mb-8">
+              <motion.div
+                className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shadow-lg shadow-black/10 flex-shrink-0"
                 whileHover={{ scale: 1.1, rotate: 5 }}
               >
-                <span className="text-primary-foreground font-bold text-lg">JT</span>
+                <span className="text-[#8846CF] font-black text-xl tracking-tighter italic">JT</span>
               </motion.div>
-              <div>
-                <span className="font-semibold">Jithesh Technologies</span>
-                <p className="text-xs text-background/60">Private Limited</p>
+              <div className="flex flex-col">
+                <span className="text-lg md:text-xl font-black text-white tracking-tight">Jithesh Technologies</span>
+                <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-white/60">Pioneering Digital Engineering</p>
               </div>
             </div>
-            <p className="text-background/70 leading-relaxed mb-6 max-w-sm">
-              Global BIM & Engineering Consultancy delivering intelligent Revit-based 
-              solutions for architecture, MEP, and structural projects worldwide.
+            <p className="text-white/80 leading-relaxed mb-8 max-w-sm text-base md:text-lg font-medium">
+              A premier Global BIM & Engineering Consultancy delivering data-rich
+              digital twin solutions for the world's most complex projects.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
-                  href={social.href}
+                  href="#"
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-background/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors"
-                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="w-12 h-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-[#8846CF] text-white transition-all duration-300"
+                  whileHover={{ y: -5, scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <social.icon size={18} />
+                  <social.icon size={20} />
                 </motion.a>
               ))}
             </div>
           </motion.div>
 
-          {/* Services */}
-          <motion.div variants={fadeInUpVariants}>
-            <h4 className="font-semibold mb-4">Services</h4>
-            <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
-                <li key={link.name}>
-                  <motion.a
-                    href={link.href}
-                    className="text-background/70 hover:text-background transition-colors"
-                    whileHover={{ x: 4 }}
-                  >
-                    {link.name}
-                  </motion.a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Company */}
-          <motion.div variants={fadeInUpVariants}>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <motion.a
-                    href={link.href}
-                    className="text-background/70 hover:text-background transition-colors"
-                    whileHover={{ x: 4 }}
-                  >
-                    {link.name}
-                  </motion.a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-
-          {/* Training */}
-          <motion.div variants={fadeInUpVariants}>
-            <h4 className="font-semibold mb-4">Training</h4>
-            <ul className="space-y-3">
-              {footerLinks.training.map((link) => (
-                <li key={link.name}>
-                  <motion.a
-                    href={link.href}
-                    className="text-background/70 hover:text-background transition-colors"
-                    whileHover={{ x: 4 }}
-                  >
-                    {link.name}
-                  </motion.a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+          {/* Links Columns */}
+          {[
+            { title: 'Services', links: footerLinks.services },
+            { title: 'Information', links: footerLinks.company },
+            { title: 'Learning', links: footerLinks.training }
+          ].map((column) => (
+            <div key={column.title} className="flex flex-col">
+              <h4 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] mb-8">{column.title}</h4>
+              <ul className="space-y-4">
+                {column.links.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      to={link.href}
+                      className="text-white/70 hover:text-white transition-colors font-medium text-[15px]"
+                    >
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        {/* Bottom Bar */}
-        <motion.div 
+        {/* Bottom Section */}
+        <motion.div
           variants={fadeInUpVariants}
-          className="pt-8 border-t border-background/10 flex flex-col md:flex-row items-center justify-between gap-4"
+          className="pt-10 border-t border-white/20 flex flex-col md:flex-row items-center justify-between gap-8"
         >
-          <p className="text-sm text-background/60">
-            © {new Date().getFullYear()} Jithesh Technologies Pvt. Ltd. All rights reserved.
+          <p className="text-sm font-medium text-white/60">
+            © {new Date().getFullYear()} Jithesh Technologies Pvt. Ltd. <span className="mx-2 text-white/40">|</span> Crafted for Digital Excellence.
           </p>
-          <div className="flex items-center gap-6">
-            <motion.a 
-              href="#" 
-              className="text-sm text-background/60 hover:text-background transition-colors"
+          <div className="flex items-center gap-10">
+            <motion.a
+              href="#"
+              className="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white transition-colors"
               whileHover={{ scale: 1.05 }}
             >
-              Privacy Policy
+              Privacy
             </motion.a>
-            <motion.a 
-              href="#" 
-              className="text-sm text-background/60 hover:text-background transition-colors"
+            <motion.a
+              href="#"
+              className="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white transition-colors"
               whileHover={{ scale: 1.05 }}
             >
-              Terms of Service
+              Terms
+            </motion.a>
+            <motion.a
+              href="#"
+              className="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white transition-colors"
+              whileHover={{ scale: 1.05 }}
+            >
+              Support
             </motion.a>
           </div>
         </motion.div>

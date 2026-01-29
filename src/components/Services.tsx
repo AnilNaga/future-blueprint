@@ -1,37 +1,40 @@
 import { Building, Thermometer, Columns, Layers, Calculator, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
-    icon: Building,
     title: 'Architecture BIM',
-    description: '2D plans, sections, elevations, and intelligent 3D models built for precision and collaboration.',
-    features: ['Floor Plans', 'Sections & Elevations', '3D Models', 'Design Documentation'],
+    description: '2D plans, sections, elevations, and intelligent 3D models built for precision.',
+    gradient: 'from-[#8846CF] to-[#6a32a1]',
+    icon: Building,
+    features: ['Floor Plans', '3D Models', 'Documentation'],
+    href: '/architecture'
   },
   {
-    icon: Thermometer,
     title: 'MEP BIM',
     description: 'HVAC, plumbing, drainage, and fire fighting systems with clash-free coordination.',
-    features: ['HVAC Systems', 'Plumbing', 'Drainage', 'Fire Fighting'],
+    gradient: 'from-sky-400 to-cyan-600',
+    icon: Thermometer,
+    features: ['HVAC Systems', 'Plumbing', 'Fire Fighting'],
+    href: '/mep-bim'
   },
   {
-    icon: Columns,
     title: 'Structural BIM',
     description: 'Rebar detailing, beams, columns, and construction-ready structural models.',
-    features: ['Rebar Detailing', 'Beams & Columns', 'Foundation Design', 'Shop Drawings'],
+    gradient: 'from-emerald-500 to-teal-700',
+    icon: Columns,
+    features: ['Rebar Detailing', 'Foundations', 'Shop Drawings'],
+    href: '/structural'
   },
   {
-    icon: Layers,
-    title: '2D + 3D Integration',
-    description: 'Single source of truth BIM models ensuring seamless coordination across disciplines.',
-    features: ['Clash Detection', 'Coordination', 'Federated Models', 'Visualization'],
-  },
-  {
+    title: 'BOQs & Coordination',
+    description: 'Accurate take-offs and clash detection directly from federated BIM models.',
+    gradient: 'from-slate-700 to-slate-900',
     icon: Calculator,
-    title: 'BOQs & Quantities',
-    description: 'Accurate take-offs directly from BIM models for precise cost control.',
-    features: ['Quantity Take-offs', 'Cost Estimation', 'Material Schedules', 'Reporting'],
+    features: ['Clash Detection', 'Quantity Take-offs', 'Reporting'],
+    href: '/architecture'
   },
 ];
 
@@ -40,92 +43,93 @@ const Services = () => {
   const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
 
   return (
-    <section id="services" className="section section-alt">
+    <section id="services" className="section section-alt py-20 px-6">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <motion.div 
+        <motion.div
           ref={headerRef}
           initial="hidden"
           animate={headerInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
           className="max-w-3xl mx-auto text-center mb-16"
         >
-          <motion.p 
+          <motion.p
             variants={fadeInUpVariants}
-            className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
+            className="text-xs md:text-sm font-semibold text-primary uppercase tracking-[0.3em] mb-4"
           >
-            Our Services
+            Capabilities
           </motion.p>
-          <motion.h2 
+          <motion.h2
             variants={fadeInUpVariants}
-            className="text-foreground mb-6"
+            className="text-3xl md:text-5xl font-black text-slate-900 mb-6 leading-tight"
           >
             Comprehensive BIM Solutions
           </motion.h2>
-          <motion.p 
+          <motion.p
             variants={fadeInUpVariants}
-            className="text-lg text-muted-foreground"
+            className="text-base md:text-lg text-text-secondary max-w-2xl mx-auto leading-relaxed"
           >
             End-to-end BIM services for architecture, MEP, and structural engineering projects of any scale.
           </motion.p>
         </motion.div>
 
         {/* Services Grid */}
-        <motion.div 
+        <motion.div
           ref={gridRef}
           initial="hidden"
           animate={gridInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
         >
-          {services.map((service) => (
-            <motion.div
-              key={service.title}
-              variants={fadeInUpVariants}
-              whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="service-card group"
-            >
-              <div className="relative z-10">
-                {/* Icon */}
-                <motion.div 
-                  className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary transition-all duration-300"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  <service.icon className="w-7 h-7 text-primary group-hover:text-primary-foreground transition-colors" />
-                </motion.div>
+          {services.map((service, index) => (
+            <Link key={service.title} to={service.href}>
+              <motion.div
+                variants={fadeInUpVariants}
+                whileHover={{ y: -6, scale: 1.01 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className={`relative h-full rounded-2xl p-6 bg-gradient-to-br ${service.gradient} shadow-lg shadow-slate-200/40 overflow-hidden group cursor-pointer border border-white/20`}
+              >
+                <div className="absolute top-0 right-0 w-48 h-48 bg-white/10 blur-[60px] rounded-full -translate-y-1/2 translate-x-1/2" />
 
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-foreground mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
-                  {service.description}
-                </p>
+                <div className="relative z-10 max-w-[90%] flex flex-col h-full">
+                  <h3 className="mb-2 text-white text-lg font-bold">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/80 mb-5 leading-relaxed text-[13px] font-normal">
+                    {service.description}
+                  </p>
 
-                {/* Features */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {service.features.map((feature) => (
-                    <span
-                      key={feature}
-                      className="px-3 py-1 text-xs font-medium bg-muted text-muted-foreground rounded-full"
-                    >
-                      {feature}
-                    </span>
-                  ))}
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {service.features.map((feature) => (
+                      <span
+                        key={feature}
+                        className="px-3 py-1 text-[8px] font-bold uppercase tracking-wider bg-white/15 backdrop-blur-lg rounded-md text-white border border-white/5"
+                      >
+                        {feature}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
-                {/* Link */}
-                <motion.a
-                  href="#contact"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-primary"
-                  whileHover={{ x: 4 }}
-                  transition={{ duration: 0.2 }}
+                <motion.div
+                  className="absolute right-[-20px] bottom-[-40px] opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none"
+                  animate={{
+                    y: [0, -15, 0]
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                 >
-                  Learn more <ArrowRight size={16} />
-                </motion.a>
-              </div>
-            </motion.div>
+                  <service.icon className="w-64 h-64 text-white" />
+                </motion.div>
+
+                <div className="absolute top-8 right-8 w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all shadow-lg">
+                  <ArrowRight className="w-6 h-6 text-white" />
+                </div>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
       </div>

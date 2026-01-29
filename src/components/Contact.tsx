@@ -2,22 +2,22 @@ import { useState } from 'react';
 import { MapPin, Phone, Mail, Send, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
-import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants, slideInLeftVariants, slideInRightVariants } from '@/hooks/useScrollAnimation';
+import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
 
 const contactInfo = [
   {
     icon: MapPin,
-    label: 'Office',
-    value: 'India & International',
+    label: 'Visit us',
+    value: 'India & International office HQ.',
   },
   {
     icon: Phone,
-    label: 'Phone',
-    value: '+91 XXX XXX XXXX',
+    label: 'Call us',
+    value: 'Mon-Fri from 8am to 5pm.',
   },
   {
     icon: Mail,
-    label: 'Email',
+    label: 'Email us',
     value: 'info@jitheshtech.com',
   },
 ];
@@ -27,7 +27,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    company: '',
+    phone: '',
     message: '',
   });
 
@@ -37,11 +37,9 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    
     toast.success('Thank you! We\'ll get back to you soon.');
-    setFormData({ name: '', email: '', company: '', message: '' });
+    setFormData({ name: '', email: '', phone: '', message: '' });
     setIsSubmitting(false);
   };
 
@@ -50,187 +48,132 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section">
-      <div className="container mx-auto px-6">
+    <section id="contact" className="py-24 bg-white border-t border-gray-100">
+      <div className="container mx-auto px-6 max-w-7xl">
         {/* Header */}
-        <motion.div 
+        <motion.div
           ref={headerRef}
           initial="hidden"
           animate={headerInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
-          className="max-w-3xl mx-auto text-center mb-16"
+          className="text-center mb-20"
         >
-          <motion.p 
+          <motion.h2
             variants={fadeInUpVariants}
-            className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
+            className="text-3xl md:text-4xl font-bold mb-4 tracking-tight"
+            style={{ color: 'rgb(136, 70, 207)' }}
           >
-            Contact Us
-          </motion.p>
-          <motion.h2 
-            variants={fadeInUpVariants}
-            className="text-foreground mb-6"
-          >
-            Let's Build the Future
-            <br />
-            <span className="gradient-text">Together</span>
+            Get in touch
           </motion.h2>
-          <motion.p 
+          <motion.p
             variants={fadeInUpVariants}
-            className="text-lg text-muted-foreground"
+            className="text-lg text-slate-600 font-normal max-w-2xl mx-auto"
           >
-            Ready to transform your projects with BIM? Get in touch with our team.
+            Ready to help your company scale faster? Let’s chat about how we can help.
           </motion.p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           ref={contentRef}
           initial="hidden"
           animate={contentInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
-          className="grid lg:grid-cols-5 gap-12 lg:gap-16 max-w-6xl mx-auto"
+          className="grid lg:grid-cols-2 gap-16 items-start"
         >
-          {/* Contact Info */}
-          <motion.div 
-            variants={slideInLeftVariants}
-            className="lg:col-span-2 space-y-8"
+          {/* Contact Info Cards */}
+          <div className="space-y-6">
+            <div className="grid gap-6">
+              {contactInfo.map((item) => (
+                <div key={item.label} className="flex items-start gap-4 p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                  <div className="w-10 h-10 rounded-lg bg-indigo-50/50 flex items-center justify-center flex-shrink-0 border border-indigo-100/50">
+                    <item.icon className="w-5 h-5" style={{ color: 'rgb(136, 70, 207)' }} />
+                  </div>
+                  <div>
+                    <p className="text-lg font-bold text-slate-900 mb-1">{item.label}</p>
+                    <p className="text-base text-slate-600 font-normal">{item.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Compact Contact Form */}
+          <form
+            onSubmit={handleSubmit}
+            className="bg-gray-50/50 rounded-2xl p-8 border border-gray-200 shadow-sm"
           >
-            {contactInfo.map((item, index) => (
-              <motion.div 
-                key={item.label} 
-                className="flex items-start gap-4"
-                initial={{ opacity: 0, x: -30 }}
-                animate={contentInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.1 * index, duration: 0.5 }}
-              >
-                <motion.div 
-                  className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0"
-                  whileHover={{ scale: 1.1, rotate: 5 }}
-                >
-                  <item.icon className="w-5 h-5 text-primary" />
-                </motion.div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">{item.label}</p>
-                  <p className="font-medium text-foreground">{item.value}</p>
-                </div>
-              </motion.div>
-            ))}
-
-            {/* Working Hours */}
-            <motion.div 
-              className="pt-6 border-t border-border"
-              initial={{ opacity: 0 }}
-              animate={contentInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.4, duration: 0.5 }}
-            >
-              <h4 className="font-semibold text-foreground mb-3">Working Hours</h4>
-              <p className="text-muted-foreground text-sm">
-                Monday - Friday: 9:00 AM - 6:00 PM
-                <br />
-                Saturday: 9:00 AM - 1:00 PM
-              </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div 
-            variants={slideInRightVariants}
-            className="lg:col-span-3"
-          >
-            <motion.form 
-              onSubmit={handleSubmit} 
-              className="glass-card rounded-3xl p-8 md:p-10"
-              whileHover={{ boxShadow: '0 25px 60px hsl(222 47% 11% / 0.1)' }}
-              transition={{ duration: 0.3 }}
-            >
-              <div className="grid sm:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2">
-                    Full Name
-                  </label>
-                  <motion.input
-                    whileFocus={{ scale: 1.01 }}
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                    placeholder="John Doe"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2">
-                    Email Address
-                  </label>
-                  <motion.input
-                    whileFocus={{ scale: 1.01 }}
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                    placeholder="john@company.com"
-                  />
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <label htmlFor="company" className="block text-sm font-medium text-foreground mb-2">
-                  Company / Organization
-                </label>
-                <motion.input
-                  whileFocus={{ scale: 1.01 }}
+            <div className="grid sm:grid-cols-2 gap-6 mb-6">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-sm font-semibold text-slate-700">Full Name</label>
+                <input
                   type="text"
-                  id="company"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
-                  placeholder="Your company name"
-                />
-              </div>
-
-              <div className="mb-8">
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2">
-                  Message
-                </label>
-                <motion.textarea
-                  whileFocus={{ scale: 1.01 }}
-                  id="message"
-                  name="message"
-                  value={formData.message}
+                  id="name"
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
-                  rows={4}
-                  className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
-                  placeholder="Tell us about your project..."
+                  placeholder="Your name"
+                  className="w-full h-11 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-100/50 focus:border-indigo-400 transition-all font-normal text-sm shadow-sm"
                 />
               </div>
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-sm font-semibold text-slate-700">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="you@company.com"
+                  className="w-full h-11 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-100/50 focus:border-indigo-400 transition-all font-normal text-sm shadow-sm"
+                />
+              </div>
+            </div>
 
-              <motion.button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full btn-primary flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                whileHover={{ y: -4, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-5 h-5 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <Send size={18} />
-                  </>
-                )}
-              </motion.button>
-            </motion.form>
-          </motion.div>
+            <div className="space-y-2 mb-6">
+              <label htmlFor="phone" className="text-sm font-semibold text-slate-700">Phone number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="+91 (555) 000-0000"
+                className="w-full h-11 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-100/50 focus:border-indigo-400 transition-all font-normal text-sm shadow-sm"
+              />
+            </div>
+
+            <div className="space-y-2 mb-8">
+              <label htmlFor="message" className="text-sm font-semibold text-slate-700">How can we help?</label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={4}
+                placeholder="Briefly describe your requirements..."
+                className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-100/50 focus:border-indigo-400 transition-all resize-none font-normal text-sm leading-relaxed shadow-sm"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full h-12 text-white rounded-lg font-bold transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group text-sm shadow-sm active:scale-[0.98]"
+              style={{ backgroundColor: 'rgb(136, 70, 207)' }}
+            >
+              {isSubmitting ? (
+                <Loader2 className="w-5 h-5 animate-spin" />
+              ) : (
+                <>
+                  Send Inquiry
+                  <Send size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </>
+              )}
+            </button>
+          </form>
         </motion.div>
       </div>
     </section>

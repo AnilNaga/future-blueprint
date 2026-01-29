@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
 
 const projects = [
@@ -37,7 +38,7 @@ const Projects = () => {
     <section id="projects" className="section">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <motion.div 
+        <motion.div
           ref={headerRef}
           initial="hidden"
           animate={headerInView ? 'visible' : 'hidden'}
@@ -45,91 +46,90 @@ const Projects = () => {
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12"
         >
           <div>
-            <motion.p 
+            <motion.p
               variants={fadeInUpVariants}
               className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
             >
               Our Work
             </motion.p>
-            <motion.h2 
+            <motion.h2
               variants={fadeInUpVariants}
-              className="text-foreground"
+              className="text-foreground font-semibold"
             >
               Featured Projects
             </motion.h2>
           </div>
-          <motion.a
-            variants={fadeInUpVariants}
-            href="#contact"
-            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
-            whileHover={{ x: 4 }}
-          >
-            View all projects <ArrowUpRight size={16} />
-          </motion.a>
+          <motion.div variants={fadeInUpVariants}>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+            >
+              View all projects <ArrowUpRight size={16} />
+            </Link>
+          </motion.div>
         </motion.div>
 
         {/* Projects Grid */}
-        <motion.div 
+        <motion.div
           ref={gridRef}
           initial="hidden"
           animate={gridInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
-          className="grid md:grid-cols-2 gap-6 md:gap-8"
+          className="grid md:grid-cols-2 gap-8 md:gap-12"
         >
-          {projects.map((project) => (
+          {projects.map((project, index) => (
             <motion.div
               key={project.title}
               variants={fadeInUpVariants}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.4 }}
-              className="group relative overflow-hidden rounded-3xl aspect-[4/3] cursor-pointer"
+              whileHover={{ y: -12 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className={`group relative overflow-hidden rounded-3xl aspect-[16/10] cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500 ${index % 2 === 1 ? 'md:mt-12' : ''
+                }`}
             >
               {/* Image with Zoom Effect */}
               <motion.img
                 src={project.image}
                 alt={project.title}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700"
                 initial={{ scale: 1 }}
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
               />
 
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-foreground/90 via-foreground/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
+              {/* Sophisticated Darkening Overlay */}
+              <div className="absolute inset-0 bg-background/20 group-hover:bg-background/40 transition-colors duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
-              {/* Content */}
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <motion.div
-                  initial={{ y: 20, opacity: 0.8 }}
-                  whileHover={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <span className="inline-block px-3 py-1 bg-primary/20 backdrop-blur-sm text-primary-foreground text-xs font-medium rounded-full mb-3">
+              {/* Glass Details Card (Shows on Hover) */}
+              <div className="absolute inset-0 p-12 flex flex-col justify-end">
+                <div className="translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                  <motion.div
+                    className="inline-block px-4 py-2 glass-card-strong text-slate-900 text-[9px] font-semibold uppercase tracking-wider rounded-full mb-5 border border-white/20 shadow-lg"
+                  >
                     {project.category}
-                  </span>
-                  <h3 className="text-2xl font-semibold text-white mb-2">
+                  </motion.div>
+                  <h3 className="text-3xl font-semibold text-slate-900 mb-3 tracking-tight">
                     {project.title}
                   </h3>
-                  <p className="text-white/70 text-sm">
+                  <p className="text-slate-600 text-sm font-medium flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                     {project.location}
                   </p>
-                </motion.div>
+                </div>
 
-                {/* Arrow */}
-                <motion.div 
-                  className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileHover={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
+                {/* Arrow Icon */}
+                <motion.div
+                  className="absolute top-12 right-12 w-16 h-16 rounded-3xl glass-card flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-500 border border-white/20 shadow-2xl"
                 >
-                  <ArrowUpRight className="text-white" size={20} />
+                  <ArrowUpRight className="text-slate-900" size={28} />
                 </motion.div>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+          ))
+          }
+        </motion.div >
+      </div >
+    </section >
   );
 };
 
