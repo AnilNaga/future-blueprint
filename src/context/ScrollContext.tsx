@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
+import { useScroll as useFramerScroll, useMotionValueEvent } from 'framer-motion';
 
 interface ScrollContextType {
     isNavbarVisible: boolean;
@@ -11,58 +12,34 @@ const ScrollContext = createContext<ScrollContextType | undefined>(undefined);
 export const ScrollProvider = ({ children }: { children: ReactNode }) => {
     const [isNavbarVisible, setIsNavbarVisible] = useState(true);
     const [isArrowVisible, setIsArrowVisible] = useState(false);
-    const [lastScrollY, setLastScrollY] = useState(0);
+    const { scrollY } = useFramerScroll();
 
     const scrollToTop = useCallback(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-        });
-        // Instant reveal navbar when scrolling to top via button
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setIsNavbarVisible(true);
     }, []);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const documentHeight = document.documentElement.scrollHeight;
+    useMotionValueEvent(scrollY, "change", (current) => {
+        const previous = scrollY.getPrevious() || 0;
+        const diff = current - previous;
+        const isScrollingDown = diff > 0;
 
-            // Navbar visibility logic
-            let nextNavbarVisible = isNavbarVisible;
-            if (currentScrollY < 10) {
-                nextNavbarVisible = true;
-            } else if (currentScrollY > lastScrollY) {
-                // Scrolling down
-                nextNavbarVisible = false;
-            } else {
-                // Scrolling up
-                nextNavbarVisible = true;
-            }
-            setIsNavbarVisible(nextNavbarVisible);
+        // Navbar Logic
+        if (current < 10) {
+            setIsNavbarVisible(true);
+        } else if (isScrollingDown && current > 50) {
+            setIsNavbarVisible(false);
+        } else if (!isScrollingDown) {
+            setIsNavbarVisible(true);
+        }
 
-            // Arrow visibility logic: appear when navbar disappears AND we are deep enough
-            // OR stay sticky if we reached a significant depth
-            const scrollPercentage = (currentScrollY / (documentHeight - windowHeight)) * 100;
-            if (!nextNavbarVisible && currentScrollY > 300) {
-                setIsArrowVisible(true);
-            } else if (currentScrollY < 100) {
-                setIsArrowVisible(false);
-            } else if (scrollPercentage > 40) {
-                // Keep it sticky past 40% even if navbar shows? 
-                // Let's stick to user request: "visible when nav bar disappear"
-                // But keep sticky past 40 for "return to top" utility.
-                setIsArrowVisible(true);
-            } else if (nextNavbarVisible && scrollPercentage <= 40) {
-                setIsArrowVisible(false);
-            }
-
-            setLastScrollY(currentScrollY);
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [lastScrollY]);
+        // Arrow Logic
+        if (current > 300) {
+            setIsArrowVisible(true);
+        } else {
+            setIsArrowVisible(false);
+        }
+    });
 
     return (
         <ScrollContext.Provider value={{ isNavbarVisible, isArrowVisible, scrollToTop }}>
@@ -71,10 +48,13 @@ export const ScrollProvider = ({ children }: { children: ReactNode }) => {
     );
 };
 
-export const useScroll = () => {
+export const useScrollContext = () => {
     const context = useContext(ScrollContext);
-    if (context === undefined) {
-        throw new Error('useScroll must be used within a ScrollProvider');
-    }
+    if (!context) throw new Error('useScrollContext must be used within ScrollProvider');
     return context;
 };
+
+// Alias for compatibility
+export const useScroll = useScrollContext;
+
+// Validating that we can simply replace the file content.

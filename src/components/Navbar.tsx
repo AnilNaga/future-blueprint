@@ -15,21 +15,15 @@ const navLinks = [
 
 const Navbar = () => {
   const location = useLocation();
+  // useScrollContext provides global scroll state, but we removed manual listeners.
+  // We need to restore local state for menus.
   const { isNavbarVisible, scrollToTop } = useScroll();
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [servicesMenuOpen, setServicesMenuOpen] = useState(false);
   const [worksMenuOpen, setWorksMenuOpen] = useState(false);
+  // const [isScrolled, setIsScrolled] = useState(false); // Removed as Navbar is now solid permanently
   const activeSection = useActiveSection(navLinks.map((link) => link.id));
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   // Body Scroll Lock
   useEffect(() => {
@@ -55,11 +49,11 @@ const Navbar = () => {
         ease: [0.25, 0.4, 0.25, 1],
         opacity: { duration: 0.2 }
       }}
-      className="fixed top-0 inset-x-0 z-[100] transition-all duration-300 pointer-events-none"
+      className="fixed top-0 inset-x-0 z-[100] transition-all duration-300 pointer-events-none will-change-transform"
     >
-      <div className={`w-full transition-all duration-500 ${isScrolled ? 'py-2' : 'py-6'}`}>
+      <div className={`w-full transition-all duration-500 py-4`}>
         <nav
-          className={`mx-auto w-[92%] max-w-7xl flex items-center justify-between rounded-2xl px-8 py-4 transition-all duration-500 pointer-events-auto ${isScrolled ? 'glass-nav shadow-xl border-white/20' : 'bg-transparent border-transparent'}`}
+          className={`mx-auto w-[92%] max-w-7xl flex items-center justify-between rounded-2xl px-8 py-4 transition-all duration-500 pointer-events-auto bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-[0_1px_0_rgba(0,0,0,0.04)]`}
         >
           {/* Logo */}
           <motion.div

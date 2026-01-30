@@ -44,6 +44,7 @@ const Training = () => {
             initial="hidden"
             animate={contentInView ? 'visible' : 'hidden'}
             variants={staggerContainerVariants}
+            className="text-center lg:text-left"
           >
             <motion.p
               variants={slideInLeftVariants}
@@ -61,7 +62,7 @@ const Training = () => {
             </motion.h2>
             <motion.p
               variants={slideInLeftVariants}
-              className="text-lg text-slate-500 mb-10 leading-relaxed font-medium"
+              className="text-lg text-slate-500 mb-10 leading-relaxed font-medium mx-auto lg:mx-0 max-w-lg"
             >
               Industry-aligned Revit training with immersive project simulations.
               Our talent pipeline connects ambitious engineers with global BIM leadership opportunities.
@@ -70,12 +71,12 @@ const Training = () => {
             {/* Benefits Grid */}
             <motion.div
               variants={staggerContainerVariants}
-              className="grid sm:grid-cols-2 gap-6 mb-12"
+              className="grid sm:grid-cols-2 gap-6 mb-12 mx-auto lg:mx-0 max-w-2xl lg:max-w-none"
             >
               {benefits.map((benefit, index) => (
                 <motion.div
                   key={benefit}
-                  className="flex items-center gap-4 group"
+                  className="flex items-center gap-4 group justify-center lg:justify-start"
                   variants={fadeInUpVariants}
                   custom={index}
                 >

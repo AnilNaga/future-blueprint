@@ -79,15 +79,32 @@ const Footer = () => {
           </motion.div>
 
           {/* Links Columns */}
-          {[
-            { title: 'Services', links: footerLinks.services },
-            { title: 'Information', links: footerLinks.company },
-            { title: 'Learning', links: footerLinks.training }
-          ].map((column) => (
-            <div key={column.title} className="flex flex-col">
-              <h4 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] mb-8">{column.title}</h4>
-              <ul className="space-y-4">
-                {column.links.map((link) => (
+
+          {/* Links Columns - 2 Column Layout */}
+          <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-12">
+            {/* Column 1: Services */}
+            <div className="flex flex-col">
+              <h4 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] mb-8">Services</h4>
+              <ul className="grid grid-cols-1 gap-4">
+                {footerLinks.services.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      to={link.href}
+                      className="text-white/70 hover:text-white transition-colors font-medium text-[15px] flex items-center gap-2"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-white/20" />
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 2: Quick Links (Company + Training) */}
+            <div className="flex flex-col">
+              <h4 className="text-[12px] font-bold text-white uppercase tracking-[0.3em] mb-8">Quick Links</h4>
+              <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
+                {[...footerLinks.company, ...footerLinks.training].map((link) => (
                   <li key={link.name}>
                     <Link
                       to={link.href}
@@ -99,7 +116,7 @@ const Footer = () => {
                 ))}
               </ul>
             </div>
-          ))}
+          </div>
         </div>
 
         {/* Bottom Section */}
