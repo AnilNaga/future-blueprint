@@ -43,26 +43,24 @@ const Projects = () => {
           initial="hidden"
           animate={headerInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12"
+          className="flex flex-col items-center text-center gap-4 mb-16"
         >
-          <div>
-            <motion.p
-              variants={fadeInUpVariants}
-              className="text-sm font-medium text-primary uppercase tracking-widest mb-4"
-            >
-              Our Work
-            </motion.p>
-            <motion.h2
-              variants={fadeInUpVariants}
-              className="text-foreground font-semibold"
-            >
-              Featured Projects
-            </motion.h2>
-          </div>
+          <motion.p
+            variants={fadeInUpVariants}
+            className="text-xs md:text-sm font-bold text-primary uppercase tracking-[0.3em] mb-2"
+          >
+            Portfolio
+          </motion.p>
+          <motion.h2
+            variants={fadeInUpVariants}
+            className="text-3xl md:text-5xl font-black text-slate-900 mb-6 leading-tight"
+          >
+            Featured Projects
+          </motion.h2>
           <motion.div variants={fadeInUpVariants}>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:gap-3 transition-all"
+              className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:gap-3 transition-all uppercase tracking-widest"
             >
               View all projects <ArrowUpRight size={16} />
             </Link>

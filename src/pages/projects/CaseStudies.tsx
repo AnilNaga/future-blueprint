@@ -11,7 +11,7 @@ const projects = [
         location: 'NEOM, Saudi Arabia',
         year: '2024',
         description: 'Multi-discipline BIM management for an entire smart city district, integrating thousands of assets.',
-        imageAlt: 'Case Study 1'
+        image: '/neom_smart_city_bim_1769750344028.png'
     },
     {
         title: 'Scandinavian Sustainability Hub',
@@ -19,7 +19,7 @@ const projects = [
         location: 'Oslo, Norway',
         year: '2023',
         description: 'How we used automated BIM workflows to reduce construction waste by 40% for a carbon-neutral park.',
-        imageAlt: 'Case Study 2'
+        image: '/images/atrium_section_bim.png'
     },
     {
         title: 'Pan-Asian Logistics Network',
@@ -27,7 +27,7 @@ const projects = [
         location: 'Multiple Locations',
         year: '2022',
         description: 'Standardizing BIM processes across 12 countries for a unified digital twin logistics platform.',
-        imageAlt: 'Case Study 3'
+        image: '/images/building_walkthrough_3d_1769580061469.png'
     }
 ];
 
@@ -47,16 +47,16 @@ const CaseStudies = () => {
                         initial="hidden"
                         animate={heroInView ? 'visible' : 'hidden'}
                         variants={staggerContainerVariants}
-                        className="max-w-3xl"
+                        className="max-w-5xl mx-auto flex flex-col items-center text-center"
                     >
-                        <motion.div variants={fadeInUpVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 text-amber-600 text-[10px] font-bold uppercase tracking-widest mb-6 border border-amber-100">
+                        <motion.div variants={fadeInUpVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 text-amber-600 text-[11px] font-bold uppercase tracking-widest mb-8 border border-amber-100">
                             Global Success
                         </motion.div>
-                        <motion.h1 variants={fadeInUpVariants} className="text-[40px] md:text-[60px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
+                        <motion.h1 variants={fadeInUpVariants} className="text-4xl sm:text-5xl md:text-[68px] font-black text-slate-900 leading-[1.05] tracking-tight mb-8">
                             BIM Case <br />
                             <span className="text-slate-400">Studies.</span>
                         </motion.h1>
-                        <motion.p variants={fadeInUpVariants} className="text-lg text-slate-500 leading-relaxed font-normal max-w-xl">
+                        <motion.p variants={fadeInUpVariants} className="text-base md:text-xl text-slate-600 leading-relaxed font-normal max-w-3xl mx-auto">
                             Real-world impact. Explore how our strategic BIM consultancy and engineering services solve mission-critical challenges for enterprise clients.
                         </motion.p>
                     </motion.div>
@@ -77,10 +77,17 @@ const CaseStudies = () => {
                                 variants={fadeInUpVariants}
                                 className="group relative bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition-all duration-500 flex flex-col"
                             >
-                                <div className="aspect-[1.5/1] bg-amber-50/5 relative overflow-hidden">
-                                    <div className="absolute inset-0 bg-amber-600/5 opacity-0 group-hover:opacity-5 transition-opacity" />
-                                    <div className="absolute inset-0 flex items-center justify-center opacity-[0.15] transition-transform duration-700 group-hover:scale-105">
-                                        <Award size={60} className="text-amber-200" />
+                                <div className="aspect-[1.5/1] bg-amber-50 relative overflow-hidden">
+                                    <img
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/0 transition-colors" />
+                                    <div className="absolute top-3 left-3 flex gap-2">
+                                        <span className="px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-md text-[8px] font-bold text-amber-600 border border-amber-100 uppercase tracking-widest shadow-sm">
+                                            {project.category}
+                                        </span>
                                     </div>
                                 </div>
 
@@ -112,6 +119,38 @@ const CaseStudies = () => {
                             </motion.div>
                         ))}
                     </motion.div>
+                </section>
+                {/* Dynamic Innovation Reels - Videos Section */}
+                <section className="container mx-auto px-6 py-20 bg-slate-900 rounded-[40px] mb-20 overflow-hidden relative">
+                    <div className="absolute inset-0 opacity-10"
+                        style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+
+                    <div className="relative z-10 text-center mb-16">
+                        <span className="text-amber-500 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Innovation Reels</span>
+                        <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Digital Twin Masterclasses</h2>
+                        <p className="text-white/60 max-w-2xl mx-auto">Explore the deep-tech workflows behind our most complex engineering coordiation efforts.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                        {[
+                            { title: 'Global Infrastructure Coordination', desc: 'BIM-powered spatial coordination for complex transit hubs.' },
+                            { title: 'Automated 4D Construction', desc: 'Integrating schedule data into real-time digital twins.' }
+                        ].map((video, idx) => (
+                            <div key={idx} className="group cursor-pointer">
+                                <div className="aspect-video rounded-3xl bg-slate-800 border border-white/10 overflow-hidden relative group-hover:border-amber-500/50 transition-all duration-500">
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center group-hover:scale-110 group-hover:bg-amber-600 transition-all duration-500">
+                                            <ArrowRight className="text-white rotate-[-45deg]" />
+                                        </div>
+                                    </div>
+                                    <div className="absolute bottom-6 left-6 right-6">
+                                        <h3 className="text-white font-bold text-lg mb-1">{video.title}</h3>
+                                        <p className="text-white/40 text-xs">{video.desc}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </section>
             </main>
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Send, Loader2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, Loader2, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
 import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
@@ -11,9 +11,14 @@ const contactInfo = [
     value: 'India & International office HQ.',
   },
   {
+    icon: MessageCircle,
+    label: 'WhatsApp',
+    value: 'Chat with us on WhatsApp',
+  },
+  {
     icon: Phone,
     label: 'Call us',
-    value: 'Mon-Fri from 8am to 5pm.',
+    value: '+91 12345 67890',
   },
   {
     icon: Mail,
@@ -78,22 +83,57 @@ const Contact = () => {
           initial="hidden"
           animate={contentInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
-          className="grid lg:grid-cols-2 gap-16 items-start"
+          className="grid lg:grid-cols-2 gap-16 items-start relative z-[70]"
         >
           {/* Contact Info Cards */}
           <div className="space-y-6">
             <div className="grid gap-6">
-              {contactInfo.map((item) => (
-                <div key={item.label} className="flex items-start gap-4 p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-                  <div className="w-10 h-10 rounded-lg bg-indigo-50/50 flex items-center justify-center flex-shrink-0 border border-indigo-100/50">
-                    <item.icon className="w-5 h-5" style={{ color: 'rgb(136, 70, 207)' }} />
+              {contactInfo.map((item) => {
+                const href = item.label === 'Visit us'
+                  ? 'https://maps.app.goo.gl/JrtfBRtCQz7PB6js8'
+                  : item.label === 'Email us'
+                    ? `mailto:${item.value}`
+                    : item.label === 'WhatsApp'
+                      ? 'https://wa.me/911234567890?text=Hello!%20I\'m%20interested%20in%20your%20services.'
+                      : item.label === 'Call us'
+                        ? `tel:${item.value.replace(/\s+/g, '')}`
+                        : undefined;
+
+                const isExternal = href?.startsWith('http');
+
+                const CardContent = (
+                  <>
+                    <div className="w-10 h-10 rounded-lg bg-indigo-50/50 flex items-center justify-center flex-shrink-0 border border-indigo-100/50 group-hover:bg-indigo-100 transition-colors">
+                      <item.icon className="w-5 h-5" style={{ color: 'rgb(136, 70, 207)' }} />
+                    </div>
+                    <div>
+                      <p className="text-lg font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">{item.label}</p>
+                      <p className="text-base text-slate-600 font-normal">{item.value}</p>
+                    </div>
+                  </>
+                );
+
+                if (href) {
+                  return (
+                    <a
+                      key={item.label}
+                      href={href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="flex items-start gap-4 p-6 bg-white border border-gray-200 rounded-xl shadow-sm hover:border-indigo-400 hover:shadow-md transition-all group cursor-pointer relative z-10 block pointer-events-auto"
+                      style={{ textDecoration: 'none' }}
+                    >
+                      {CardContent}
+                    </a>
+                  );
+                }
+
+                return (
+                  <div key={item.label} className="flex items-start gap-4 p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+                    {CardContent}
                   </div>
-                  <div>
-                    <p className="text-lg font-bold text-slate-900 mb-1">{item.label}</p>
-                    <p className="text-base text-slate-600 font-normal">{item.value}</p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

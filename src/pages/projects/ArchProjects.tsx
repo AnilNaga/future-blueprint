@@ -18,12 +18,12 @@ const ArchProjects = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="max-w-4xl"
+                        className="max-w-5xl mx-auto flex flex-col items-center text-center"
                     >
                         <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 tracking-tight">
                             Architectural Excellence
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed max-w-2xl">
+                        <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed max-w-3xl mx-auto">
                             A showcase of our most complex architectural BIM projects, delivered with precision and data-driven intelligence across the globe.
                         </p>
                     </motion.div>

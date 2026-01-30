@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, MapPin, Phone, Send, Loader2, HelpCircle, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const contactOptions = [
     {
@@ -27,16 +29,25 @@ const contactOptions = [
         title: 'Visit us',
         description: 'India & International office HQ.',
         buttonText: 'Get directions',
-        href: 'https://maps.google.com',
+        href: 'https://maps.app.goo.gl/JrtfBRtCQz7PB6js8',
         iconBg: 'bg-indigo-50/30',
         color: 'rgb(136, 70, 207)',
     },
     {
+        icon: MessageCircle,
+        title: 'WhatsApp',
+        description: 'Chat with us on WhatsApp.',
+        buttonText: 'Message us',
+        href: 'https://wa.me/911234567890?text=Hello!%20I\'m%20interested%20in%20your%20services.',
+        iconBg: 'bg-emerald-50/30',
+        color: 'rgb(16, 185, 129)',
+    },
+    {
         icon: Phone,
         title: 'Call us',
-        description: 'Mon-Fri from 8am to 5pm.',
+        description: '+91 12345 67890',
         buttonText: 'Call our team',
-        href: 'tel:+91XXXXXXXXXX',
+        href: 'tel:+911234567890',
         iconBg: 'bg-indigo-50/30',
         color: 'rgb(136, 70, 207)',
     },
@@ -66,148 +77,158 @@ const ContactPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-white pt-32 pb-24">
-            <div className="max-w-[1280px] mx-auto px-6 md:px-8">
-                {/* Header Section */}
-                <div className="text-center mb-16 md:mb-24">
-                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6" style={{ color: 'rgb(136, 70, 207)' }}>
-                        Get in touch
-                    </h1>
-                    <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-normal">
-                        Ready to help your company scale faster? Let’s chat about how we can help.
-                    </p>
-                </div>
-
-                {/* Contact Options Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
-                    {contactOptions.map((option) => (
-                        <div
-                            key={option.title}
-                            className="bg-white border border-gray-200 rounded-[12px] p-6 shadow-sm flex flex-col items-start gap-4"
-                        >
-                            <div className={`w-12 h-12 ${option.iconBg} rounded-lg flex items-center justify-center border border-indigo-100/50`}>
-                                <option.icon className="w-6 h-6" style={{ color: option.color }} />
-                            </div>
-                            <div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">{option.title}</h3>
-                                <p className="text-base text-slate-600 mb-6 font-normal leading-relaxed">
-                                    {option.description}
-                                </p>
-                            </div>
-                            <a
-                                href={option.href}
-                                className="mt-auto inline-flex items-center px-4 py-2 text-base font-semibold text-slate-900 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
-                            >
-                                {option.buttonText}
-                            </a>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Message Us Section */}
-                <div className="max-w-[800px] mx-auto">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-slate-900 mb-4">Message us</h2>
-                        <p className="text-lg text-slate-600 font-normal">
-                            We'll get back to you within 24 hours.
+        <div className="min-h-screen bg-white">
+            <Navbar />
+            <main className="pt-32 pb-24">
+                <div className="max-w-[1280px] mx-auto px-6 md:px-8">
+                    {/* Header Section */}
+                    <div className="text-center mb-16 md:mb-24">
+                        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6" style={{ color: 'rgb(136, 70, 207)' }}>
+                            Get in touch
+                        </h1>
+                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-normal">
+                            Ready to help your company scale faster? Let’s chat about how we can help.
                         </p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-6">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label htmlFor="firstName" className="text-sm font-semibold text-slate-700">First name</label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="firstName"
-                                    name="firstName"
-                                    value={formData.firstName}
-                                    onChange={handleChange}
-                                    placeholder="First name"
-                                    className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label htmlFor="lastName" className="text-sm font-semibold text-slate-700">Last name</label>
-                                <input
-                                    required
-                                    type="text"
-                                    id="lastName"
-                                    name="lastName"
-                                    value={formData.lastName}
-                                    onChange={handleChange}
-                                    placeholder="Last name"
-                                    className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
-                                />
-                            </div>
+                    {/* Contact Options Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32 relative z-[70]">
+                        {contactOptions.map((option) => {
+                            const isExternal = option.href.startsWith('http');
+                            return (
+                                <a
+                                    key={option.title}
+                                    href={option.href}
+                                    target={isExternal ? "_blank" : undefined}
+                                    rel={isExternal ? "noopener noreferrer" : undefined}
+                                    className="bg-white border border-gray-200 rounded-[12px] p-6 shadow-sm flex flex-col items-start gap-4 hover:border-indigo-400 hover:shadow-md transition-all group cursor-pointer relative z-10 block pointer-events-auto"
+                                    style={{ textDecoration: 'none' }}
+                                >
+                                    <div className={`w-12 h-12 ${option.iconBg} rounded-lg flex items-center justify-center border border-indigo-100/50 transition-colors group-hover:bg-indigo-50/50`}>
+                                        <option.icon className="w-6 h-6" style={{ color: option.color }} />
+                                    </div>
+                                    <div className="w-full">
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">{option.title}</h3>
+                                        <p className="text-base text-slate-600 mb-6 font-normal leading-relaxed">
+                                            {option.description}
+                                        </p>
+                                    </div>
+                                    <div
+                                        className="mt-auto inline-flex items-center px-4 py-2 text-base font-semibold text-slate-900 border border-gray-300 rounded-lg group-hover:bg-indigo-50 group-hover:border-indigo-300 transition-colors"
+                                    >
+                                        {option.buttonText}
+                                    </div>
+                                </a>
+                            );
+                        })}
+                    </div>
+
+                    {/* Message Us Section */}
+                    <div className="max-w-[800px] mx-auto">
+                        <div className="text-center mb-16">
+                            <h2 className="text-4xl font-bold text-slate-900 mb-4">Message us</h2>
+                            <p className="text-lg text-slate-600 font-normal">
+                                We'll get back to you within 24 hours.
+                            </p>
                         </div>
 
-                        <div className="space-y-2">
-                            <label htmlFor="email" className="text-sm font-semibold text-slate-700">Email</label>
-                            <input
-                                required
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder="you@company.com"
-                                className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
-                            />
-                        </div>
-
-                        <div className="space-y-2">
-                            <label htmlFor="phone" className="text-sm font-semibold text-slate-700">Phone number</label>
-                            <div className="relative flex shadow-sm">
-                                <div className="flex items-center gap-1.5 px-3 py-2 border border-r-0 border-gray-300 rounded-l-lg bg-white text-slate-700 font-medium cursor-pointer hover:bg-gray-50">
-                                    <span className="text-sm">IN</span>
-                                    <ChevronDown size={14} className="text-slate-400" />
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div className="space-y-2">
+                                    <label htmlFor="firstName" className="text-sm font-semibold text-slate-700">First name</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="firstName"
+                                        name="firstName"
+                                        value={formData.firstName}
+                                        onChange={handleChange}
+                                        placeholder="First name"
+                                        className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
+                                    />
                                 </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="lastName" className="text-sm font-semibold text-slate-700">Last name</label>
+                                    <input
+                                        required
+                                        type="text"
+                                        id="lastName"
+                                        name="lastName"
+                                        value={formData.lastName}
+                                        onChange={handleChange}
+                                        placeholder="Last name"
+                                        className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label htmlFor="email" className="text-sm font-semibold text-slate-700">Email</label>
                                 <input
-                                    type="tel"
-                                    id="phone"
-                                    name="phone"
-                                    value={formData.phone}
+                                    required
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    value={formData.email}
                                     onChange={handleChange}
-                                    placeholder="+91 (555) 000-0000"
-                                    className="flex-1 h-12 px-4 rounded-r-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal"
+                                    placeholder="you@company.com"
+                                    className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
                                 />
                             </div>
-                        </div>
 
-                        <div className="space-y-2">
-                            <label htmlFor="message" className="text-sm font-semibold text-slate-700">Message</label>
-                            <textarea
-                                required
-                                id="message"
-                                name="message"
-                                value={formData.message}
-                                onChange={handleChange}
-                                placeholder="Leave us a message..."
-                                rows={5}
-                                className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all resize-none placeholder:text-gray-400 font-normal leading-relaxed shadow-sm"
-                            />
-                        </div>
+                            <div className="space-y-2">
+                                <label htmlFor="phone" className="text-sm font-semibold text-slate-700">Phone number</label>
+                                <div className="relative flex shadow-sm">
+                                    <div className="flex items-center gap-1.5 px-3 py-2 border border-r-0 border-gray-300 rounded-l-lg bg-white text-slate-700 font-medium cursor-pointer hover:bg-gray-50">
+                                        <span className="text-sm">IN</span>
+                                        <ChevronDown size={14} className="text-slate-400" />
+                                    </div>
+                                    <input
+                                        type="tel"
+                                        id="phone"
+                                        name="phone"
+                                        value={formData.phone}
+                                        onChange={handleChange}
+                                        placeholder="+91 (555) 000-0000"
+                                        className="flex-1 h-12 px-4 rounded-r-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal"
+                                    />
+                                </div>
+                            </div>
 
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full h-14 text-white rounded-lg font-bold text-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group shadow-sm active:scale-[0.99] mt-8"
-                            style={{ backgroundColor: 'rgb(136, 70, 207)' }}
-                        >
-                            {isSubmitting ? (
-                                <Loader2 className="w-6 h-6 animate-spin" />
-                            ) : (
-                                <>
-                                    Send message
-                                    <Send size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                </>
-                            )}
-                        </button>
-                    </form>
+                            <div className="space-y-2">
+                                <label htmlFor="message" className="text-sm font-semibold text-slate-700">Message</label>
+                                <textarea
+                                    required
+                                    id="message"
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    placeholder="Leave us a message..."
+                                    rows={5}
+                                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all resize-none placeholder:text-gray-400 font-normal leading-relaxed shadow-sm"
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full h-14 text-white rounded-lg font-bold text-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group shadow-sm active:scale-[0.99] mt-8"
+                                style={{ backgroundColor: 'rgb(136, 70, 207)' }}
+                            >
+                                {isSubmitting ? (
+                                    <Loader2 className="w-6 h-6 animate-spin" />
+                                ) : (
+                                    <>
+                                        Send message
+                                        <Send size={20} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                                    </>
+                                )}
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </main>
+            <Footer />
         </div>
     );
 };

@@ -55,16 +55,16 @@ const StructuralProjects = () => {
                         initial="hidden"
                         animate={heroInView ? 'visible' : 'hidden'}
                         variants={staggerContainerVariants}
-                        className="max-w-3xl"
+                        className="max-w-5xl mx-auto flex flex-col items-center text-center"
                     >
-                        <motion.div variants={fadeInUpVariants} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold uppercase tracking-widest mb-6 border border-slate-200">
+                        <motion.div variants={fadeInUpVariants} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 text-slate-600 text-[11px] font-bold uppercase tracking-widest mb-8 border border-slate-200">
                             Portfolio
                         </motion.div>
-                        <motion.h1 variants={fadeInUpVariants} className="text-[40px] md:text-[60px] font-bold text-slate-900 leading-[1.1] tracking-tight mb-6">
+                        <motion.h1 variants={fadeInUpVariants} className="text-4xl sm:text-5xl md:text-[68px] font-black text-slate-900 leading-[1.05] tracking-tight mb-8">
                             Structural <br />
                             <span className="text-slate-400">Integrity.</span>
                         </motion.h1>
-                        <motion.p variants={fadeInUpVariants} className="text-lg text-slate-500 leading-relaxed font-normal max-w-xl">
+                        <motion.p variants={fadeInUpVariants} className="text-base md:text-xl text-slate-600 leading-relaxed font-normal max-w-3xl mx-auto">
                             High-fidelity structural modeling and detailing for complex steel and RC structures, ensuring construction feasibility and structural safety.
                         </motion.p>
                     </motion.div>

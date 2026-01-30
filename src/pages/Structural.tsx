@@ -53,35 +53,35 @@ const Structural = () => {
                             initial="hidden"
                             animate={heroInView ? 'visible' : 'hidden'}
                             variants={staggerContainerVariants}
-                            className="max-w-4xl"
+                            className="max-w-5xl mx-auto flex flex-col items-center text-center"
                         >
                             <motion.div
                                 variants={fadeInUpVariants}
-                                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/5 border border-primary/10 text-primary text-[11px] font-semibold mb-6"
+                                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/20 text-primary text-[12px] font-bold mb-8 shadow-sm"
                             >
-                                <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                                Structural Engineering BIM
+                                <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                                Portfolio
                             </motion.div>
 
                             <motion.h1
                                 variants={fadeInUpVariants}
-                                className="text-3xl sm:text-4xl md:text-[46px] font-black text-slate-900 mb-6 leading-[1.1] tracking-tight"
+                                className="text-4xl sm:text-5xl md:text-[68px] font-black text-slate-900 mb-8 leading-[1.05] tracking-tight"
                             >
-                                Structural BIM Engineering. <br />
-                                <span className="text-slate-400 font-medium tracking-tight">Data-Driven Intelligence.</span>
+                                Structural <br />
+                                <span className="text-slate-400 font-medium tracking-tight">Integrity.</span>
                             </motion.h1>
 
                             <motion.p
                                 variants={fadeInUpVariants}
-                                className="text-base md:text-lg text-slate-600 mb-10 max-w-2xl leading-relaxed font-normal"
+                                className="text-base md:text-xl text-slate-600 mb-12 max-w-3xl leading-relaxed font-normal"
                             >
-                                We deliver construction-ready structural BIM models that ensure safety, accuracy, and buildability. From reinforcement detailing to quantification, our models support engineers, fabricators, and contractors across complex projects worldwide.
+                                High-fidelity structural modeling and detailing for complex steel and RC structures, ensuring construction feasibility and structural safety.
                             </motion.p>
 
                             <motion.div variants={fadeInUpVariants}>
-                                <Link to="/contact" className="btn-primary px-7 py-3 text-[15px] group shadow-premium-hover inline-block">
+                                <Link to="/contact" className="btn-primary px-8 py-4 text-[16px] group shadow-premium-hover flex items-center">
                                     Discuss Structural BIM
-                                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                 </Link>
                             </motion.div>
                         </motion.div>
@@ -95,10 +95,10 @@ const Structural = () => {
                             variants={fadeInUpVariants}
                             initial="hidden"
                             whileInView="visible"
-                            className="mb-10"
+                            className="mb-16 flex flex-col items-center text-center"
                         >
-                            <h2 className="text-[26px] md:text-[30px] font-semibold text-slate-900 tracking-tight flex items-center gap-3">
-                                <div className="w-1 h-8 bg-primary rounded-full" />
+                            <h2 className="text-[28px] md:text-[36px] font-bold text-slate-900 tracking-tight flex flex-col items-center gap-4">
+                                <div className="w-12 h-1 bg-primary rounded-full" />
                                 Structural Core Capabilities
                             </h2>
                         </motion.div>
