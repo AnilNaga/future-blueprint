@@ -7,7 +7,7 @@ const services = [
   {
     title: 'Architecture BIM',
     description: '2D plans, sections, elevations, and intelligent 3D models built for precision.',
-    gradient: 'from-[#8846CF] to-[#6a32a1]',
+    gradient: 'from-[rgb(176,119,237)] to-[#9a5ed6]',
     icon: Building,
     features: ['Floor Plans', '3D Models', 'Documentation'],
     href: '/architecture'
@@ -15,7 +15,7 @@ const services = [
   {
     title: 'MEP BIM',
     description: 'HVAC, plumbing, drainage, and fire fighting systems with clash-free coordination.',
-    gradient: 'from-sky-400 to-cyan-600',
+    gradient: 'from-[rgb(176,119,237)] to-[#9a5ed6]',
     icon: Thermometer,
     features: ['HVAC Systems', 'Plumbing', 'Fire Fighting'],
     href: '/mep-bim'
@@ -23,7 +23,7 @@ const services = [
   {
     title: 'Structural BIM',
     description: 'Rebar detailing, beams, columns, and construction-ready structural models.',
-    gradient: 'from-emerald-500 to-teal-700',
+    gradient: 'from-[rgb(176,119,237)] to-[#9a5ed6]',
     icon: Columns,
     features: ['Rebar Detailing', 'Foundations', 'Shop Drawings'],
     href: '/structural'
@@ -31,7 +31,7 @@ const services = [
   {
     title: 'BOQs & Coordination',
     description: 'Accurate take-offs and clash detection directly from federated BIM models.',
-    gradient: 'from-slate-700 to-slate-900',
+    gradient: 'from-[rgb(176,119,237)] to-[#9a5ed6]',
     icon: Calculator,
     features: ['Clash Detection', 'Quantity Take-offs', 'Reporting'],
     href: '/architecture'

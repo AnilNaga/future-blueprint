@@ -11,28 +11,28 @@ const workflowSteps = [
         icon: Target,
         title: 'Strategic Planning',
         description: 'We define the BIM execution plan (BEP) and level of development (LOD) requirements tailored to your specific project goals.',
-        gradient: 'from-[#8846CF] to-purple-700'
+        gradient: 'from-[rgb(176,119,237)] to-[#9a5ed6]'
     },
     {
         number: "02",
         icon: Box,
         title: 'Precision Modeling',
         description: 'Our experts build highly detailed 3D Revit models for Architecture, MEP, and Structural disciplines with surgical precision.',
-        gradient: 'from-fuchsia-500 to-pink-600'
+        gradient: 'from-[rgb(176,119,237)] to-[#9a5ed6]'
     },
     {
         number: "03",
         icon: AlertCircle,
         title: 'Clash Coordination',
         description: 'Using Navisworks and BIM Collaborate Pro, we identify and resolve spatial conflicts before they reach the construction site.',
-        gradient: 'from-violet-500 to-purple-600'
+        gradient: 'from-[rgb(176,119,237)] to-[#9a5ed6]'
     },
     {
         number: "04",
         icon: FileCheck,
         title: 'Construction Records',
         description: 'We generate accurate shop drawings, BOQs, and as-built models that serve as a digital twin for the entire lifecycle.',
-        gradient: 'from-pink-500 to-rose-600'
+        gradient: 'from-[rgb(176,119,237)] to-[#9a5ed6]'
     }
 ];
 
@@ -117,11 +117,11 @@ const RevitWorkflows = () => {
                                 <motion.div
                                     animate={contentInView ? { scale: [0, 1.2, 1], opacity: 1 } : { scale: 0, opacity: 0 }}
                                     transition={{ delay: (index * 0.2) + 0.5, duration: 0.5 }}
-                                    className="absolute left-4 md:left-1/2 top-0 md:top-1/2 w-5 h-5 rounded-full bg-white border-4 border-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] -translate-x-1/2 md:-translate-y-1/2 z-20 hidden md:block"
+                                    className="absolute left-4 md:left-1/2 top-0 md:top-1/2 w-5 h-5 rounded-full bg-white border-4 border-primary shadow-[0_0_20px_rgba(var(--primary-rgb),0.3)] -translate-x-1/2 md:-translate-y-1/2 z-20 block"
                                 />
 
                                 {/* Content Card */}
-                                <div className={`w-full md:w-[45%] ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
+                                <div className={`w-full md:w-[45%] pl-12 md:pl-0 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'}`}>
                                     <motion.div
                                         whileHover={{ y: -12, scale: 1.02 }}
                                         className={`relative p-6 rounded-[24px] bg-gradient-to-br ${step.gradient} shadow-2xl transition-all duration-700 overflow-hidden group border border-white/20`}

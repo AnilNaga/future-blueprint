@@ -31,6 +31,18 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Body Scroll Lock
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <motion.header
       initial={{ y: -100, opacity: 0 }}
@@ -337,7 +349,7 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMobileMenuOpen(false)}
-              className="fixed inset-0 bg-slate-900/10 backdrop-blur-xl z-[90] md:hidden"
+              className="fixed inset-0 bg-slate-900/10 backdrop-blur-xl z-[9999] md:hidden pointer-events-auto"
             />
 
             <motion.div
@@ -345,7 +357,7 @@ const Navbar = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute top-24 inset-x-6 z-[100] md:hidden"
+              className="absolute top-24 inset-x-6 z-[10000] md:hidden pointer-events-auto"
             >
               <div className="bg-white/80 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl overflow-hidden">
                 <div className="px-8 py-10 space-y-8">

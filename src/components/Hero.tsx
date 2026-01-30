@@ -13,7 +13,7 @@ const Hero = () => {
   const overlayOpacity = useTransform(scrollY, [0, 400], [0.55, 0.95]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative min-h-[calc(100vh-72px)] w-full overflow-hidden flex items-center">
       {/* Video Background with Parallax */}
       <motion.div
         className="absolute inset-0"
@@ -38,7 +38,7 @@ const Hero = () => {
 
       {/* Content with Parallax and Top Padding */}
       <motion.div
-        className="relative z-10 flex h-full items-center justify-center text-center px-6 pt-[140px] md:pt-[120px]"
+        className="relative z-10 flex h-full items-center justify-center text-center px-6 w-full"
         style={{ y: contentY, opacity: contentOpacity }}
       >
         <div className="max-w-5xl">
