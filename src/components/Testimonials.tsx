@@ -6,7 +6,7 @@ const testimonials = [
     {
         name: 'Sarah Chen',
         role: 'Principal Architect, Vertex Design',
-        quote: "Jithesh Technologies transformed our workflow. Their BIM expertise allowed us to coordinate a 50-story tower with zero on-site clashes. They is a true partner in digital excellence.",
+        quote: "Jithesh Technologies transformed our workflow. Their BIM expertise allowed us to coordinate a 50-story tower with zero on-site clashes. They are a true partner in digital excellence.",
     },
     {
         name: 'Marcus Thorne',
@@ -20,11 +20,11 @@ const testimonials = [
     }
 ];
 
-const clientLogos = ['LOGOTYPE A', 'LOGOTYPE B', 'LOGOTYPE C', 'LOGOTYPE D', 'LOGOTYPE E'];
-
 const Testimonials = () => {
     const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
-    const { ref: gridRef, isInView: gridInView } = useScrollAnimation({ amount: 0.1 });
+
+    // Duplicate testimonials for seamless loop
+    const marqueeTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
     return (
         <section id="testimonials" className="section relative overflow-hidden bg-slate-50/30 py-32">
@@ -40,7 +40,7 @@ const Testimonials = () => {
                     initial="hidden"
                     animate={headerInView ? 'visible' : 'hidden'}
                     variants={staggerContainerVariants}
-                    className="max-w-4xl mx-auto text-center mb-28"
+                    className="max-w-4xl mx-auto text-center mb-20"
                 >
                     <motion.p
                         variants={fadeInUpVariants}
@@ -63,53 +63,61 @@ const Testimonials = () => {
                     </motion.p>
                 </motion.div>
 
-                {/* Testimonials Grid */}
-                <motion.div
-                    ref={gridRef}
-                    initial="hidden"
-                    animate={gridInView ? 'visible' : 'hidden'}
-                    variants={staggerContainerVariants}
-                    className="grid md:grid-cols-3 gap-8 lg:gap-12"
-                >
-                    {testimonials.map((testimonial) => (
-                        <motion.div
-                            key={testimonial.name}
-                            variants={fadeInUpVariants}
-                            whileHover={{ y: -12 }}
-                            className="relative group h-full"
-                        >
-                            <div className="h-full p-10 md:p-12 rounded-[48px] bg-white border border-slate-100 shadow-xl shadow-slate-200/20 group-hover:shadow-2xl group-hover:shadow-primary/5 transition-all duration-500 flex flex-col justify-between overflow-hidden">
-                                {/* Quote mark accent */}
-                                <Quote className="w-12 h-12 text-primary/5 absolute top-10 right-10 group-hover:text-primary/10 transition-colors duration-500" />
+                {/* Marquee Gradient Masks */}
+                <div className="relative w-full overflow-hidden mask-gradient-x">
+                    {/* Linear Gradients for fade effect on edges */}
+                    <div className="absolute top-0 left-0 w-32 h-full z-20 bg-gradient-to-r from-[#f8fafc] to-transparent pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-32 h-full z-20 bg-gradient-to-l from-[#f8fafc] to-transparent pointer-events-none" />
 
-                                <div className="relative z-10">
-                                    <div className="flex gap-1 mb-8">
-                                        {[...Array(5)].map((_, i) => (
-                                            <Star key={i} className="w-3.5 h-3.5 fill-primary text-primary opacity-80" />
-                                        ))}
+
+                    {/* Moving Track */}
+                    <motion.div
+                        className="flex gap-8 w-max"
+                        animate={{ x: ["-33.333333%", "0%"] }}
+                        transition={{
+                            duration: 40,
+                            repeat: Infinity,
+                            ease: "linear"
+                        }}
+                    >
+                        {marqueeTestimonials.map((testimonial, index) => (
+                            <div
+                                key={`${testimonial.name}-${index}`}
+                                className="w-[400px] md:w-[500px] flex-shrink-0"
+                            >
+                                <div className="h-full p-10 md:p-12 rounded-[48px] bg-white border border-slate-100 shadow-xl shadow-slate-200/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 flex flex-col justify-between overflow-hidden group">
+                                    {/* Quote mark accent */}
+                                    <Quote className="w-12 h-12 text-primary/5 absolute top-10 right-10 group-hover:text-primary/10 transition-colors duration-500" />
+
+                                    <div className="relative z-10">
+                                        <div className="flex gap-1 mb-8">
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star key={i} className="w-3.5 h-3.5 fill-primary text-primary opacity-80" />
+                                            ))}
+                                        </div>
+
+                                        <p className="text-slate-600 text-lg leading-relaxed mb-12 font-medium">
+                                            "{testimonial.quote}"
+                                        </p>
                                     </div>
 
-                                    <p className="text-slate-600 text-lg leading-relaxed mb-12 font-medium">
-                                        "{testimonial.quote}"
-                                    </p>
-                                </div>
+                                    <div className="relative z-10">
+                                        <div className="w-12 h-px bg-slate-100 mb-6" />
+                                        <h4 className="font-bold text-slate-900 text-lg mb-1">
+                                            {testimonial.name}
+                                        </h4>
+                                        <p className="text-primary text-[11px] font-bold uppercase tracking-wider">
+                                            {testimonial.role}
+                                        </p>
+                                    </div>
 
-                                <div className="relative z-10">
-                                    <div className="w-12 h-px bg-slate-100 mb-6" />
-                                    <h4 className="font-bold text-slate-900 text-lg mb-1">
-                                        {testimonial.name}
-                                    </h4>
-                                    <p className="text-primary text-[11px] font-bold uppercase tracking-wider">
-                                        {testimonial.role}
-                                    </p>
+                                    {/* Decorative gradient hover indicator */}
+                                    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-[#8846CF] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                                 </div>
-
-                                {/* Decorative gradient hover indicator */}
-                                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-[#8846CF] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
+                        ))}
+                    </motion.div>
+                </div>
 
             </div>
         </section>
