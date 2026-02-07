@@ -1,152 +1,148 @@
-import { Building, Thermometer, Columns, Calculator, ArrowRight } from 'lucide-react';
-import { motion, useMotionValue, useMotionTemplate, useTransform, useScroll } from 'framer-motion';
+import { Building, Thermometer, Columns, Layers, Calculator, ArrowRight } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
 import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
 import { Link } from 'react-router-dom';
-import { useRef } from 'react';
+import React from 'react';
 
 const services = [
   {
-    title: 'Architecture BIM',
+    title: 'ArchitectureBIM',
     description: '2D plans, sections, elevations, and intelligent 3D models built for precision.',
-    gradient: 'from-violet-500 to-purple-600',
-    icon: Building,
     features: ['Floor Plans', '3D Models', 'Documentation'],
-    href: '/architecture'
+    href: '/architecture',
+    color: 'bg-white',
+    accent: '#914694'
   },
   {
-    title: 'MEP BIM',
+    title: 'MEPBIM',
     description: 'HVAC, plumbing, drainage, and fire fighting systems with clash-free coordination.',
-    gradient: 'from-blue-500 to-cyan-500',
-    icon: Thermometer,
     features: ['HVAC Systems', 'Plumbing', 'Fire Fighting'],
-    href: '/mep-bim'
+    href: '/mep-bim',
+    color: 'bg-white',
+    accent: '#914694'
   },
   {
-    title: 'Structural BIM',
+    title: 'StructuralBIM',
     description: 'Rebar detailing, beams, columns, and construction-ready structural models.',
-    gradient: 'from-emerald-500 to-teal-500',
-    icon: Columns,
     features: ['Rebar Detailing', 'Foundations', 'Shop Drawings'],
-    href: '/structural'
+    href: '/structural',
+    color: 'bg-white',
+    accent: '#914694'
   },
   {
-    title: 'BOQs & Coordination',
+    title: 'BOQs&Coordination',
     description: 'Accurate take-offs and clash detection directly from federated BIM models.',
-    gradient: 'from-orange-500 to-amber-500',
-    icon: Calculator,
     features: ['Clash Detection', 'Quantity Take-offs', 'Reporting'],
-    href: '/architecture'
+    href: '/architecture',
+    color: 'bg-white',
+    accent: '#914694'
   },
 ];
 
-interface ServiceCardProps {
-  service: typeof services[0];
-  index: number;
-}
+const ServiceCard = ({ service, index, isInView }: { service: any; index: number; isInView: boolean }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-const ServiceCard = ({ service, index }: ServiceCardProps) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
+
+  const shineX = useTransform(mouseXSpring, [-0.5, 0.5], ["0%", "100%"]);
+  const shineY = useTransform(mouseYSpring, [-0.5, 0.5], ["0%", "100%"]);
+
+  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+
+    x.set(xPct);
+    y.set(yPct);
   };
-  
-  const spotlightBackground = useMotionTemplate`radial-gradient(350px circle at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.15), transparent 70%)`;
-  
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
-    <Link to={service.href}>
+    <Link key={service.title} to={service.href} className="group flex perspective-1000">
       <motion.div
-        ref={cardRef}
-        variants={fadeInUpVariants}
         onMouseMove={handleMouseMove}
-        whileHover={{ y: -12, scale: 1.02, rotateX: 5, rotateY: index % 2 === 0 ? 3 : -3 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className={`relative h-full rounded-[28px] p-8 bg-gradient-to-br ${service.gradient} shadow-2xl overflow-hidden group cursor-pointer border border-white/20`}
-        style={{ perspective: '1000px', transformStyle: 'preserve-3d' }}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
+        }}
+        variants={{
+          hidden: { opacity: 0, y: 40, rotateX: 10 },
+          visible: {
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            transition: { duration: 1, ease: [0.16, 1, 0.3, 1] }
+          }
+        }}
+        whileHover={{
+          y: -12,
+          scale: 1.02,
+          rotateX: -2,
+          rotateY: 2,
+          transition: { duration: 0.4, ease: "easeOut" }
+        }}
+        className={`relative flex-1 rounded-[3rem] p-10 ${service.color} border border-white/50 backdrop-blur-xl overflow-hidden transition-all duration-700 shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_rgba(145,70,148,0.12)]`}
       >
-        {/* Spotlight effect */}
-        <motion.div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-[28px]"
-          style={{ background: spotlightBackground }}
-        />
-        
-        {/* Animated gradient orbs */}
-        <motion.div 
-          className="absolute top-0 right-0 w-48 h-48 bg-white/10 blur-[60px] rounded-full -translate-y-1/2 translate-x-1/2"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        />
-        <motion.div 
-          className="absolute bottom-0 left-0 w-32 h-32 bg-black/10 blur-[40px] rounded-full translate-y-1/2 -translate-x-1/2"
-        />
-        
-        {/* Glass border */}
-        <div className="absolute inset-0 rounded-[28px] border border-white/30" />
-        <div className="absolute inset-[1px] rounded-[27px] border border-white/10" />
 
         <div className="relative z-10 flex flex-col h-full">
-          {/* Icon */}
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 10 }}
-            className="w-16 h-16 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-6 border border-white/30 shadow-xl"
-          >
-            <service.icon className="w-8 h-8 text-white" />
-          </motion.div>
-          
-          <h3 className="mb-3 text-white text-2xl font-bold tracking-tight">
-            {service.title}
-          </h3>
-          <p className="text-white/80 mb-6 leading-relaxed text-base flex-1">
+          <div className="mb-10">
+            <h3 className="text-2xl md:text-3xl font-black text-slate-900 leading-[1.2] tracking-tight">
+              {service.title}
+            </h3>
+          </div>
+
+          <p className="text-slate-500/80 mb-12 leading-relaxed text-sm font-medium tracking-wide">
             {service.description}
           </p>
 
-          <div className="flex flex-wrap gap-2 mt-auto">
-            {service.features.map((feature, i) => (
-              <motion.span
-                key={feature}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.5 + i * 0.1 }}
-                className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider bg-white/15 backdrop-blur-lg rounded-lg text-white border border-white/10"
+          <div className="mt-auto flex flex-col gap-6">
+            <div className="flex flex-col gap-4">
+              {service.features.map((feature: string, fIdx: number) => (
+                <motion.div
+                  key={feature}
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -15 }}
+                  transition={{ delay: 1 + (index * 0.1) + (fIdx * 0.1), ease: "easeOut" }}
+                  className="flex items-center gap-4 group/item"
+                >
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#914694]/30 group-hover/item:scale-150 group-hover/item:bg-[#914694] transition-all duration-500" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-400 group-hover:text-slate-900 transition-colors">
+                    {feature}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="pt-10 mt-6 border-t border-slate-900/5 flex items-center justify-between group-hover:border-[#914694]/20 transition-colors">
+              <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#914694]">Explore</span>
+              <motion.div
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
               >
-                {feature}
-              </motion.span>
-            ))}
+                <ArrowRight size={18} className="text-[#914694]" />
+              </motion.div>
+            </div>
           </div>
         </div>
 
-        {/* Floating background icon */}
-        <motion.div
-          className="absolute right-[-30px] bottom-[-50px] opacity-[0.08] group-hover:opacity-[0.15] transition-opacity duration-700 pointer-events-none"
-          animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <service.icon className="w-72 h-72 text-white" />
-        </motion.div>
-
-        {/* Hover arrow */}
-        <motion.div 
-          className="absolute top-6 right-6 w-12 h-12 rounded-full bg-white/20 backdrop-blur-xl border border-white/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg"
-          initial={{ x: -10, opacity: 0 }}
-          whileHover={{ scale: 1.1 }}
-        >
-          <ArrowRight className="w-5 h-5 text-white" />
-        </motion.div>
-        
-        {/* Shine effect */}
-        <motion.div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none rounded-[28px]"
-          style={{ background: 'linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%)' }}
-          initial={{ x: '-100%' }}
-          whileHover={{ x: '200%' }}
-          transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
-        />
+        {/* Sublte Cinematic Branding Overlay */}
+        <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-[#914694]/5 blur-3xl rounded-full group-hover:bg-[#914694]/10 transition-colors duration-1000" />
       </motion.div>
     </Link>
   );
@@ -155,63 +151,63 @@ const ServiceCard = ({ service, index }: ServiceCardProps) => {
 const Services = () => {
   const { ref: headerRef, isInView: headerInView } = useScrollAnimation();
   const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
-  const sectionRef = useRef<HTMLElement>(null);
-  
+  const { ref: sectionRef, isInView: sectionInView } = useScrollAnimation();
+
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
-  
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
+
+  const backgroundOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.6, 1, 1, 0.6]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
-    <section id="services" ref={sectionRef} className="relative py-32 overflow-hidden">
-      {/* Parallax background */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-b from-slate-50 via-white to-slate-50/50"
-        style={{ y: backgroundY }}
-      />
-      
-      {/* Decorative elements */}
-      <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
-        style={{ backgroundImage: 'radial-gradient(hsl(var(--foreground)) 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
-      
+    <section id="services" ref={sectionRef} className="relative py-32 px-6 overflow-hidden">
+      {/* Sticky Background Layer with Scroll Reveal */}
       <motion.div
-        className="absolute top-1/4 -right-32 w-96 h-96 rounded-full bg-gradient-to-r from-primary/10 to-violet-500/10 blur-3xl"
-        animate={{ y: [0, -30, 0], scale: [1, 1.1, 1] }}
-        transition={{ duration: 10, repeat: Infinity }}
-      />
-      
-      <div className="container mx-auto px-6 relative z-10">
+        className="absolute inset-0 z-0 sticky top-0"
+        style={{
+          opacity: backgroundOpacity,
+          backgroundColor: '#fcfbe1'
+        }}
+      >
+        <motion.div
+          className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#914694]/5 blur-[120px] rounded-full"
+          style={{ y: backgroundY }}
+        />
+        <motion.div
+          className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#914694]/3 blur-[120px] rounded-full"
+          style={{ y: useTransform(backgroundY, (v) => -v) }}
+        />
+      </motion.div>
+
+      <div className="container mx-auto relative z-10">
         {/* Header */}
         <motion.div
           ref={headerRef}
           initial="hidden"
           animate={headerInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
-          className="max-w-4xl mx-auto text-center mb-20"
+          className="max-w-4xl mx-auto text-center mb-24"
         >
           <motion.div
             variants={fadeInUpVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 mb-6"
+            className="inline-block px-4 py-1.5 mb-6 rounded-full bg-slate-900/5 border border-slate-900/10 backdrop-blur-md"
           >
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs font-bold text-primary uppercase tracking-widest">Our Capabilities</span>
+            <span className="text-[10px] md:text-xs font-bold uppercase tracking-[0.4em] text-[#914694]">Capabilities</span>
           </motion.div>
           <motion.h2
             variants={fadeInUpVariants}
-            className="text-4xl md:text-6xl font-black text-foreground mb-8 leading-[0.95]"
+            className="text-4xl md:text-6xl font-black text-slate-900 mb-8 tracking-tight leading-[1.1]"
           >
-            Comprehensive BIM
-            <span className="block bg-gradient-to-r from-primary via-purple-500 to-violet-500 bg-clip-text text-transparent">
-              Solutions
-            </span>
+            Elite BIM Engineering <br />
+            <span className="text-[#914694]">Precision Workflows</span>
           </motion.h2>
           <motion.p
             variants={fadeInUpVariants}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-medium"
           >
-            End-to-end BIM services for architecture, MEP, and structural engineering projects of any scale.
+            We deploy advanced digital twins and intelligent data structures to transform complex architectural visions into constructible reality.
           </motion.p>
         </motion.div>
 
@@ -221,10 +217,15 @@ const Services = () => {
           initial="hidden"
           animate={gridInView ? 'visible' : 'hidden'}
           variants={staggerContainerVariants}
-          className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {services.map((service, index) => (
-            <ServiceCard key={service.title} service={service} index={index} />
+            <ServiceCard
+              key={service.title}
+              service={service}
+              index={index}
+              isInView={gridInView}
+            />
           ))}
         </motion.div>
       </div>

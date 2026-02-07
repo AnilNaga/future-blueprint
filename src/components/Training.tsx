@@ -37,6 +37,26 @@ const Training = () => {
   return (
     <section id="training" className="section bg-white/[0.02]">
       <div className="container mx-auto px-6">
+      {/* Sticky Scoped Background */}
+      <div
+        className="absolute inset-0 z-0 hidden md:block"
+        style={{
+          backgroundImage: 'url(/images/about-bim-background.png)',
+          backgroundAttachment: 'fixed',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
+      <div
+        className="absolute inset-0 z-0 md:hidden"
+        style={{
+          backgroundImage: 'url(/images/about-bim-background.png)',
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      />
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Content */}
           <motion.div

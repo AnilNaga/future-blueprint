@@ -2,6 +2,7 @@ import { ArrowRight, CheckCircle2, MapPin, Briefcase } from "lucide-react";
 import { motion } from "framer-motion";
 import InternshipJourney from "../components/careers/InternshipJourney";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -9,37 +10,105 @@ const Careers = () => {
     return (
         <div className="min-h-screen bg-white font-sans selection:bg-blue-100">
             <Navbar />
-            {/* 🎥 HERO SECTION (Light Theme) */}
-            <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-white">
-                {/* Background */}
-                <div className="absolute inset-0 z-0">
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10 grayscale"></div>
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/60 to-white/90"></div>
+            {/* 🎥 CAREERS LANDING HERO (Premium Refined) */}
+            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+                {/* Background Image with Dynamic Tinted Overlay */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-[20s] hover:scale-110"
+                        style={{
+                            backgroundImage: 'url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?q=80&w=2069&auto=format&fit=crop")',
+                        }}
+                    ></div>
+
+                    {/* Dynamic Tinted Overlay (Cycles through requested colors) */}
+                    <motion.div
+                        animate={{
+                            backgroundColor: [
+                                'rgb(163, 157, 70)', // Gold/Olive
+                                'rgb(45, 60, 74)',   // Dark Blue/Grey
+                                'rgb(171, 124, 63)', // Bronze
+                                'rgb(29, 85, 128)',  // Deep Blue
+                                'rgb(163, 157, 70)'  // Loop back
+                            ]
+                        }}
+                        transition={{
+                            duration: 12, // 3 seconds per color
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="absolute inset-0 mix-blend-multiply opacity-80"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/90"></div>
+
+                    {/* Subtle Engineering Elements (Glows & Grid) */}
+                    <motion.div
+                        animate={{
+                            opacity: [0.1, 0.2, 0.1],
+                            scale: [1, 1.2, 1],
+                        }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-full blur-[120px]"
+                        style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                    />
+
+                    <div
+                        className="absolute inset-0 opacity-[0.05]"
+                        style={{
+                            backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                            backgroundSize: '100px 100px'
+                        }}
+                    />
                 </div>
 
-                <div className="relative z-10 container mx-auto px-6 text-center text-slate-900">
+                <div className="relative z-10 container mx-auto px-6 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
+                        transition={{ duration: 1 }}
                     >
-                        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-slate-900">
-                            Build Global Engineering<br /> Careers with BIM
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="inline-block px-5 py-2 mb-8 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl"
+                        >
+                            <span className="text-[11px] md:text-xs font-bold uppercase tracking-[0.4em] text-white">Careers at JES BIM</span>
+                        </motion.div>
+
+                        <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[1.05] text-white">
+                            Build Global Engineering <br />
+                            <span className="text-[#914694] drop-shadow-[0_0_20px_rgba(145,70,148,0.4)]">Careers with BIM</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-slate-600 font-light mb-8 tracking-wide">
+                        <p className="text-xl md:text-2xl text-white/90 font-bold mb-8 tracking-widest uppercase">
                             Architecture • MEP • Structural • International Projects
                         </p>
-                        <p className="max-w-2xl mx-auto text-slate-500 text-lg mb-10 leading-relaxed font-medium">
+                        <p className="text-xl md:text-2xl text-white/80 font-medium mb-16 max-w-4xl mx-auto leading-relaxed drop-shadow-sm">
                             Join a team shaping the future of digital construction through precision, collaboration, and Revit-driven excellence.
                         </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800 rounded-full px-8 py-6 text-lg font-medium transition-transform hover:scale-105 shadow-xl shadow-slate-200">
-                                View Open Roles
-                            </Button>
-                            <Button variant="outline" size="lg" className="border-slate-300 text-slate-700 hover:bg-slate-50 hover:text-slate-900 rounded-full px-8 py-6 text-lg font-medium transition-transform hover:scale-105">
-                                Join Our BIM Academy
-                            </Button>
+
+                        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
+                            <Link to="/contact">
+                                <Button size="lg" className="bg-[#914694] text-white hover:bg-[#7a3b7d] rounded-full px-12 py-8 text-xl font-black transition-all hover:scale-105 shadow-2xl shadow-black/40">
+                                    View Open Roles
+                                </Button>
+                            </Link>
+                            <Link to="/contact">
+                                <Button variant="outline" size="lg" className="border-white/30 text-white hover:bg-white hover:text-slate-900 rounded-full px-12 py-8 text-xl font-black transition-all hover:scale-105 bg-white/10 backdrop-blur-md">
+                                    Join Our BIM Academy
+                                </Button>
+                            </Link>
                         </div>
+
+                        {/* Scroll Indicator (White variant) */}
+                        <motion.div
+                            animate={{ y: [0, 10, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="flex flex-col items-center gap-3 text-white/40"
+                        >
+                            <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Scroll to explore</span>
+                            <div className="w-[1px] h-12 bg-gradient-to-b from-white/40 to-transparent" />
+                        </motion.div>
                     </motion.div>
                 </div>
             </section>
@@ -120,60 +189,26 @@ const Careers = () => {
             {/* 🔄 INTERNSHIP → FULL-TIME JOURNEY */}
             <InternshipJourney />
 
-            {/* 📋 OPEN POSITIONS & 🌍 LIFE AT JITHESH */}
-            <div className="bg-white py-12">
-                <div className="container mx-auto px-6">
-                    <div className="grid lg:grid-cols-2 gap-20">
-                        {/* Open Positions */}
-                        <div>
-                            <div className="mb-10">
-                                <h2 className="text-3xl font-bold text-slate-900 mb-4">Current Opportunities</h2>
-                                <p className="text-slate-600 text-lg">We are looking for skilled professionals committed to excellence.</p>
-                            </div>
 
-                            <div className="space-y-4">
-                                {[
-                                    { role: "BIM Architect – Revit", exp: "1–5 Years", loc: "Hybrid" },
-                                    { role: "BIM MEP Engineer", exp: "2–6 Years", loc: "Onsite" },
-                                    { role: "Structural BIM Engineer", exp: "2–5 Years", loc: "Hybrid" },
-                                ].map((job, i) => (
-                                    <div key={i} className="group bg-slate-50 border border-slate-100 rounded-xl p-6 hover:bg-white hover:shadow-xl hover:border-[#8846CF]/30 transition-all duration-300 cursor-pointer flex items-center justify-between">
-                                        <div>
-                                            <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#8846CF] transition-colors">{job.role}</h3>
-                                            <div className="flex items-center gap-4 text-sm text-slate-500">
-                                                <span className="flex items-center gap-1"><Briefcase size={14} /> {job.exp}</span>
-                                                <span className="flex items-center gap-1"><MapPin size={14} /> {job.loc}</span>
-                                            </div>
-                                        </div>
-                                        <div
-                                            className="h-10 w-10 rounded-full bg-white border border-slate-200 flex items-center justify-center transition-colors group-hover:border-transparent"
-                                            style={{ backgroundColor: 'white' }}
-                                        >
-                                            <ArrowRight size={18} className="text-slate-400 group-hover:text-[#8846CF] transition-colors" />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+            {/* 🌍 LIFE AT JITHESH */}
+            <div className="bg-white py-12 md:py-24">
+                <div className="container mx-auto px-6">
+                    <div className="max-w-4xl mx-auto text-center">
+                        <h2 className="text-sm font-bold tracking-widest text-slate-500 uppercase mb-3">Life at Jithesh</h2>
+                        <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">A Culture Built on Trust</h3>
+                        <div className="prose text-slate-600 mb-12 md:mb-16 leading-relaxed max-w-2xl mx-auto font-medium">
+                            <p>
+                                We foster a calm, respectful, and focused work culture where engineers can do their best work.
+                                Our environment encourages collaboration, accountability, and continuous improvement.
+                            </p>
                         </div>
 
-                        {/* Life at Jithesh */}
-                        <div className="flex flex-col justify-center">
-                            <h2 className="text-sm font-bold tracking-widest text-slate-500 uppercase mb-3">Life at Jithesh</h2>
-                            <h3 className="text-3xl font-bold text-slate-900 mb-6">A Culture Built on Trust</h3>
-                            <div className="prose text-slate-600 mb-10 leading-relaxed">
-                                <p>
-                                    We foster a calm, respectful, and focused work culture where engineers can do their best work.
-                                    Our environment encourages collaboration, accountability, and continuous improvement.
-                                </p>
+                        <div className="grid grid-cols-2 gap-6 md:gap-10 items-start">
+                            <div className="aspect-square rounded-[40px] bg-slate-100 overflow-hidden shadow-2xl border border-slate-100">
+                                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" alt="Office" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
                             </div>
-
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="aspect-square rounded-2xl bg-slate-100 overflow-hidden shadow-sm">
-                                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" alt="Office" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-                                </div>
-                                <div className="aspect-square rounded-2xl bg-slate-100 overflow-hidden shadow-sm mt-8">
-                                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop" alt="Meeting" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-                                </div>
+                            <div className="aspect-square rounded-[40px] bg-slate-100 overflow-hidden shadow-2xl border border-slate-100 mt-12 md:mt-20">
+                                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop" alt="Meeting" className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
                             </div>
                         </div>
                     </div>
@@ -193,13 +228,16 @@ const Careers = () => {
                         <p className="text-slate-500 text-lg md:text-xl mb-12 max-w-2xl mx-auto font-medium">
                             Share your profile with us. Our team will review and connect with you.
                         </p>
-                        <Button
-                            size="lg"
-                            className="text-white h-14 px-12 text-lg rounded-full font-bold shadow-xl transition-all hover:scale-105 active:scale-95 shadow-indigo-200"
-                            style={{ backgroundColor: 'rgb(136, 70, 207)' }}
-                        >
-                            Submit Application
-                        </Button>
+                        <Link to="/contact">
+                            <Button
+                                size="lg"
+                                className="text-white h-14 px-12 text-lg rounded-full font-bold shadow-xl transition-all hover:scale-105 active:scale-95 shadow-indigo-200"
+                                style={{ backgroundColor: 'rgb(145, 70, 148)' }}
+
+                            >
+                                Submit Application
+                            </Button>
+                        </Link>
                     </motion.div>
                 </div>
             </section>

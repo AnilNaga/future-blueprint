@@ -16,7 +16,8 @@ import {
 } from 'lucide-react';
 
 const stats = [
-    { label: 'AI Tokens Used', value: '42.8M', trend: '+12.5%', color: 'from-[#8846CF]/20 to-[#6a32a1]/20', icon: Zap },
+    { label: 'AI Tokens Used', value: '42.8M', trend: '+12.5%', color: 'from-[#914694]/20 to-[#823f85]/20', icon: Zap },
+
     { label: 'Neural Accuracy', value: '99.82%', trend: '+0.1%', color: 'from-cyan-500/20 to-cyan-600/20', icon: BrainCircuit },
     { label: 'Active Processes', value: '1,284', trend: 'Stable', color: 'from-indigo-500/20 to-indigo-600/20', icon: Activity },
     { label: 'Daily Revenue', value: '$12,480', trend: '+8.2%', color: 'from-sky-500/20 to-sky-600/20', icon: TrendingUp },

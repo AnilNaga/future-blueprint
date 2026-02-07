@@ -4,6 +4,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useScroll } from '@/context/ScrollContext';
 import { Link, useLocation } from 'react-router-dom';
+import logo from '../assets/logo_cropped.jpg';
+
+
 
 const navLinks = [
   { name: 'Home', href: '/', id: 'home', type: 'page' },
@@ -66,9 +69,11 @@ const Navbar = () => {
               onClick={scrollToTop}
               className="flex items-center gap-2"
             >
-              <div className="text-xl font-bold text-slate-900 tracking-tight">
-                Jithesh<span className="text-primary">.</span>
-              </div>
+              <img
+                src={logo}
+                alt="JES BIM CONSULTANTS PVT LTD"
+                className="h-10 w-auto object-contain"
+              />
             </Link>
           </motion.div>
 
@@ -445,7 +450,8 @@ const Navbar = () => {
                     <Link
                       to="/contact"
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block w-full text-center px-6 py-5 rounded-2xl bg-[#8846CF] text-white text-sm font-black shadow-xl shadow-[#8846CF]/20"
+                      className="block w-full text-center px-6 py-5 rounded-2xl bg-[#914694] text-white text-sm font-black shadow-xl shadow-[#914694]/20"
+
                     >
                       Request Consultation
                     </Link>

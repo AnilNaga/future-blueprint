@@ -44,7 +44,8 @@ const Architecture = () => {
 
                     {/* Animated Wireframe Background Placeholder */}
                     <div className="absolute inset-0 opacity-[0.03] pointer-events-none overflow-hidden">
-                        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8846CF_1px,transparent_1px),linear-gradient(to_bottom,#8846CF_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+                        <div className="absolute inset-0 bg-[linear-gradient(to_right,#914694_1px,transparent_1px),linear-gradient(to_bottom,#914694_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
+
                     </div>
 
                     <div className="container mx-auto px-6 relative z-10">

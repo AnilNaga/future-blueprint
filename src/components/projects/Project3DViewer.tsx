@@ -20,7 +20,8 @@ const Project3DViewer = ({ modelUrl, title }: Project3DViewerProps) => {
                 <div className="flex justify-between items-start">
                     <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow-sm border border-slate-100">
                         <span className="flex items-center gap-2 text-sm font-bold text-slate-800">
-                            <Cuboid size={16} className="text-[#8846CF]" />
+                            <Cuboid size={16} className="text-[#914694]" />
+
                             Live 3D Model
                         </span>
                     </div>
@@ -52,7 +53,8 @@ const Project3DViewer = ({ modelUrl, title }: Project3DViewerProps) => {
 
                 {/* Central Object Simulation */}
                 <div className="w-32 h-32 border-2 border-slate-400/50 rounded-full flex items-center justify-center relative animate-spin-slow">
-                    <div className="w-24 h-24 border border-[#8846CF]/50 rounded-full absolute"></div>
+                    <div className="w-24 h-24 border border-[#914694]/50 rounded-full absolute"></div>
+
                 </div>
             </div>
 

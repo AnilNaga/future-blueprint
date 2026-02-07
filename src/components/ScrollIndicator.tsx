@@ -36,7 +36,8 @@ const ScrollIndicator = () => {
                     className="fixed z-[100] bottom-6 left-1/2 -translate-x-1/2 md:bottom-10 md:right-10 md:left-auto md:translate-x-0 group"
                     aria-label="Scroll to top"
                 >
-                    <div className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#8846CF] border border-white/30 shadow-[0_8px_32px_rgba(136,70,207,0.4)] overflow-hidden transition-all duration-500 group-hover:bg-[#7a3cc2] group-hover:scale-105">
+                    <div className="relative flex items-center justify-center w-14 h-14 rounded-full bg-[#914694] border border-white/30 shadow-[0_8px_32px_rgba(145,70,148,0.4)] overflow-hidden transition-all duration-500 group-hover:bg-[#823f85] group-hover:scale-105">
+
                         {/* Subtle Shine/Highlight */}
                         <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
@@ -48,7 +49,8 @@ const ScrollIndicator = () => {
                     </div>
 
                     {/* Minimalist soft glow with brand color */}
-                    <div className="absolute -inset-2 bg-[#8846CF]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <div className="absolute -inset-2 bg-[#914694]/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
                 </motion.button>
             )}
         </AnimatePresence>

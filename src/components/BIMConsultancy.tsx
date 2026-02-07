@@ -30,7 +30,7 @@ const BIMConsultancy = () => {
     const { ref: gridRef, isInView: gridInView } = useScrollAnimation();
 
     return (
-        <section id="consultancy" className="section relative">
+        <section id="consultancy" className="section relative transition-colors duration-500" style={{ backgroundColor: 'rgb(252, 250, 225)' }}>
             <div className="container mx-auto px-6">
                 {/* Header */}
                 <motion.div

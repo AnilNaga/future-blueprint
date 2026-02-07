@@ -61,40 +61,91 @@ const AboutPage = () => {
         <div className="min-h-screen bg-transparent text-foreground relative overflow-x-hidden">
             <Navbar />
             <main>
-                {/* Hero Section - Soft Warm Gradient Backdrop */}
-                <section className="relative pt-24 pb-16 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
-                    {/* Decorative background elements */}
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/2" />
-                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-accent/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
+                {/* 🎥 ABOUT US LANDING HERO (Premium Refined) */}
+                <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+                    {/* Background Image with Dynamic Tinted Overlay */}
+                    <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                        <div
+                            className="absolute inset-0 bg-cover bg-center transition-transform duration-[20s] hover:scale-110"
+                            style={{
+                                backgroundImage: 'url("/images/about_us_hero_branded.png")',
+                            }}
+                        ></div>
 
-                    <motion.div
-                        ref={heroRef}
-                        initial="hidden"
-                        animate={heroInView ? "visible" : "hidden"}
-                        variants={staggerContainerVariants}
-                        className="container mx-auto max-w-5xl text-center relative z-10"
-                    >
-                        <motion.p
-                            variants={fadeInUpVariants}
-                            className="text-primary font-bold tracking-[0.3em] uppercase text-[10px] md:text-xs mb-6"
+                        {/* Dynamic Tinted Overlay (Cycles through requested colors) */}
+                        <motion.div
+                            animate={{
+                                backgroundColor: [
+                                    'rgb(163, 157, 70)', // Gold/Olive
+                                    'rgb(45, 60, 74)',   // Dark Blue/Grey
+                                    'rgb(171, 124, 63)', // Bronze
+                                    'rgb(29, 85, 128)',  // Deep Blue
+                                    'rgb(163, 157, 70)'  // Loop back
+                                ]
+                            }}
+                            transition={{
+                                duration: 12, // 3 seconds per color
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            className="absolute inset-0 mix-blend-multiply opacity-80"
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/90"></div>
+
+                        {/* Subtle Engineering Elements (Glows & Grid) */}
+                        <motion.div
+                            animate={{
+                                opacity: [0.1, 0.2, 0.1],
+                                scale: [1, 1.2, 1],
+                            }}
+                            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-full blur-[120px]"
+                            style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                        />
+
+                        <div
+                            className="absolute inset-0 opacity-[0.05]"
+                            style={{
+                                backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                                backgroundSize: '100px 100px'
+                            }}
+                        />
+                    </div>
+
+                    <div className="relative z-10 container mx-auto px-6 text-center">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1 }}
                         >
-                            About Us
-                        </motion.p>
-                        <motion.h1
-                            variants={fadeInUpVariants}
-                            className="text-3xl sm:text-4xl md:text-7xl font-black text-slate-900 mb-8 leading-[1.1]"
-                        >
-                            Delivering BIM Excellence with <br className="hidden md:block" />
-                            <span className="text-primary">Revit-Driven</span> Precision
-                        </motion.h1>
-                        <motion.p
-                            variants={fadeInUpVariants}
-                            className="text-base md:text-xl text-text-secondary max-w-3xl mx-auto leading-relaxed"
-                        >
-                            We bridge the gap between architectural vision and construction reality using advanced digital engineering workflows.
-                        </motion.p>
-                    </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                className="inline-block px-5 py-2 mb-8 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl"
+                            >
+                                <span className="text-[11px] md:text-xs font-bold uppercase tracking-[0.4em] text-white">About Us</span>
+                            </motion.div>
+
+                            <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[1.05] text-white">
+                                Delivering BIM Excellence with <br />
+                                <span className="text-[#914694] drop-shadow-[0_0_20_px_rgba(145,70,148,0.4)]">Revit-Driven Precision</span>
+                            </h1>
+                            <p className="text-xl md:text-2xl text-white/80 font-medium mb-16 max-w-4xl mx-auto leading-relaxed drop-shadow-sm">
+                                We bridge the gap between architectural vision and construction reality using advanced digital engineering workflows.
+                            </p>
+
+                            {/* Scroll Indicator (White variant) */}
+                            <motion.div
+                                animate={{ y: [0, 10, 0] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="flex flex-col items-center gap-3 text-white/40"
+                            >
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Scroll to discover</span>
+                                <div className="w-[1px] h-12 bg-gradient-to-b from-white/40 to-transparent" />
+                            </motion.div>
+                        </motion.div>
+                    </div>
                 </section>
 
                 {/* 2. Image Strip Section */}
@@ -258,7 +309,8 @@ const AboutPage = () => {
                                 icon={Users}
                                 title="Professional BIM Team"
                                 description="Experienced Revit architects, MEP engineers, and structural modelers dedicated to your vision."
-                                gradient="from-[#8846CF] to-[#6a32a1]"
+                                gradient="from-[#914694] to-[#823f85]"
+
                             />
                             <FeatureCard
                                 icon={Target}

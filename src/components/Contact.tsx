@@ -8,7 +8,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: 'Visit us',
-    value: 'India & International office HQ.',
+    value: '104, 1st floor, Down Town Mall, Lakdikapul, Hyderabad.',
   },
   {
     icon: MessageCircle,
@@ -18,12 +18,12 @@ const contactInfo = [
   {
     icon: Phone,
     label: 'Call us',
-    value: '+91 12345 67890',
+    value: '+91 82977 44344',
   },
   {
     icon: Mail,
     label: 'Email us',
-    value: 'info@jitheshtech.com',
+    value: 'jagadish@jiteshenggsolutions.com',
   },
 ];
 
@@ -66,7 +66,8 @@ const Contact = () => {
           <motion.h2
             variants={fadeInUpVariants}
             className="text-3xl md:text-4xl font-bold mb-4 tracking-tight"
-            style={{ color: 'rgb(136, 70, 207)' }}
+            style={{ color: 'rgb(145, 70, 148)' }}
+
           >
             Get in touch
           </motion.h2>
@@ -90,11 +91,11 @@ const Contact = () => {
             <div className="grid gap-6">
               {contactInfo.map((item) => {
                 const href = item.label === 'Visit us'
-                  ? 'https://maps.app.goo.gl/JrtfBRtCQz7PB6js8'
+                  ? 'https://maps.app.goo.gl/qgeyuJBaJV11BZ5i6'
                   : item.label === 'Email us'
-                    ? `mailto:${item.value}`
+                    ? `mailto:jagadish@jiteshenggsolutions.com`
                     : item.label === 'WhatsApp'
-                      ? 'https://wa.me/911234567890?text=Hello!%20I\'m%20interested%20in%20your%20services.'
+                      ? 'https://wa.me/918297744344?text=Hello!%20I\'m%20interested%20in%20your%20services.'
                       : item.label === 'Call us'
                         ? `tel:${item.value.replace(/\s+/g, '')}`
                         : undefined;
@@ -104,7 +105,8 @@ const Contact = () => {
                 const CardContent = (
                   <>
                     <div className="w-10 h-10 rounded-lg bg-indigo-50/50 flex items-center justify-center flex-shrink-0 border border-indigo-100/50 group-hover:bg-indigo-100 transition-colors">
-                      <item.icon className="w-5 h-5" style={{ color: 'rgb(136, 70, 207)' }} />
+                      <item.icon className="w-5 h-5" style={{ color: 'rgb(145, 70, 148)' }} />
+
                     </div>
                     <div>
                       <p className="text-lg font-bold text-slate-900 mb-1 group-hover:text-indigo-600 transition-colors">{item.label}</p>
@@ -202,7 +204,8 @@ const Contact = () => {
               type="submit"
               disabled={isSubmitting}
               className="w-full h-12 text-white rounded-lg font-bold transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group text-sm shadow-sm active:scale-[0.98]"
-              style={{ backgroundColor: 'rgb(136, 70, 207)' }}
+              style={{ backgroundColor: 'rgb(145, 70, 148)' }}
+
             >
               {isSubmitting ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

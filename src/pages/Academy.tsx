@@ -1,8 +1,9 @@
-import Navbar from '@/components/Navbar';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '@/hooks/useScrollAnimation';
-import Footer from '@/components/Footer';
-import { GraduationCap, BookOpen, Users, Briefcase, CheckCircle2, Clock, Award, Building2, Settings, Layers } from 'lucide-react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from '../hooks/useScrollAnimation';
+import { GraduationCap, BookOpen, Users, Briefcase, CheckCircle2, Clock, Award, Building2, Settings, Layers, ChevronDown } from 'lucide-react';
 
 const academyTracks = [
     {
@@ -57,27 +58,104 @@ const Academy = () => {
         <div className="min-h-screen bg-white">
             <Navbar />
 
-            {/* Hero Section */}
-            <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 overflow-hidden">
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-slate-50 -z-10 skew-x-12 translate-x-1/4" />
-                <div className="container mx-auto px-6">
+            {/* 🎥 ACADEMY LANDING HERO (Premium Refined) */}
+            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+                {/* Background Image with Dynamic Tinted Overlay */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-[20s] hover:scale-110"
+                        style={{
+                            backgroundImage: 'url("https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=2070&auto=format&fit=crop")',
+                        }}
+                    ></div>
+
+                    {/* Dynamic Tinted Overlay (Cycles through requested colors) */}
                     <motion.div
-                        ref={heroRef}
-                        initial="hidden"
-                        animate={heroInView ? 'visible' : 'hidden'}
-                        variants={staggerContainerVariants}
-                        className="max-w-4xl mx-auto text-center"
+                        animate={{
+                            backgroundColor: [
+                                'rgb(163, 157, 70)', // Gold/Olive
+                                'rgb(45, 60, 74)',   // Dark Blue/Grey
+                                'rgb(171, 124, 63)', // Bronze
+                                'rgb(29, 85, 128)',  // Deep Blue
+                                'rgb(163, 157, 70)'  // Loop back
+                            ]
+                        }}
+                        transition={{
+                            duration: 12, // 3 seconds per color
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="absolute inset-0 mix-blend-multiply opacity-80"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/90"></div>
+
+                    {/* Subtle Engineering Elements (Glows & Grid) */}
+                    <motion.div
+                        animate={{
+                            opacity: [0.1, 0.2, 0.1],
+                            scale: [1, 1.2, 1],
+                        }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-full blur-[120px]"
+                        style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+                    />
+
+                    <div
+                        className="absolute inset-0 opacity-[0.05]"
+                        style={{
+                            backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                            backgroundSize: '100px 100px'
+                        }}
+                    />
+                </div>
+
+                <div className="relative z-10 container mx-auto px-6 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
                     >
-                        <motion.p variants={fadeInUpVariants} className="text-primary font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-6">
-                            Jithesh Academy
-                        </motion.p>
-                        <motion.h1 variants={fadeInUpVariants} className="text-3xl sm:text-4xl md:text-7xl font-black text-slate-900 mb-8 leading-tight">
-                            Build Your Career in <span className="text-primary">Global BIM.</span>
-                        </motion.h1>
-                        <motion.p variants={fadeInUpVariants} className="text-base md:text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed mb-10 font-medium">
-                            Elite training programs designed to transform engineers into BIM professionals.
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="inline-block px-5 py-2 mb-8 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl"
+                        >
+                            <span className="text-[11px] md:text-xs font-bold uppercase tracking-[0.4em] text-white">Elite Training</span>
+                        </motion.div>
+
+                        <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[1.05] text-white">
+                            Build Your Career in <br />
+                            <span className="text-[#914694] drop-shadow-[0_0_20px_rgba(145,70,148,0.4)]">Global BIM.</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-white/80 font-medium mb-16 max-w-4xl mx-auto leading-relaxed drop-shadow-sm">
+                            Elite training programs designed to transform engineers into BIM professionals.<br className="hidden md:block" />
                             Learn the workflows used by the world's leading architecture firms.
-                        </motion.p>
+                        </p>
+
+                        <div className="flex flex-wrap justify-center gap-12 md:gap-24 mb-20">
+                            {[
+                                { label: "Job Pipeline", desc: "Live Project Exposure" },
+                                { label: "Global Network", desc: "AEC Partners" },
+                                { label: "ISO Standards", desc: "Professional Certification" }
+                            ].map((item, i) => (
+                                <div key={i} className="flex flex-col items-center group cursor-default">
+                                    <span className="text-white font-black text-2xl mb-1 transition-colors group-hover:text-[#914694]">{item.label}</span>
+                                    <span className="text-white/50 text-xs font-bold uppercase tracking-widest">{item.desc}</span>
+                                    <div className="w-12 h-0.5 bg-[#914694] mt-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Scroll Guide (White variant) */}
+                        <motion.div
+                            animate={{ y: [0, 10, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="flex flex-col items-center gap-3 text-white/40"
+                        >
+                            <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Explore Programs</span>
+                            <ChevronDown size={24} />
+                        </motion.div>
                     </motion.div>
                 </div>
             </section>
@@ -218,10 +296,14 @@ const Academy = () => {
                                 Limited seats available for the upcoming session.
                             </p>
                             <div className="flex flex-col md:flex-row justify-center gap-6">
-                                <button className="btn-primary px-10 py-5 text-lg">Apply Now</button>
-                                <button className="px-10 py-5 text-lg font-bold text-white border border-white/20 rounded-full hover:bg-white/5 transition-colors">
-                                    Schedule a Call
-                                </button>
+                                <Link to="/contact">
+                                    <button className="btn-primary px-10 py-5 text-lg w-full md:w-auto">Apply Now</button>
+                                </Link>
+                                <Link to="/contact">
+                                    <button className="px-10 py-5 text-lg font-bold text-white border border-white/20 rounded-full hover:bg-white/5 transition-colors w-full md:w-auto">
+                                        Schedule a Call
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </div>

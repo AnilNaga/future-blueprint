@@ -71,7 +71,8 @@ const ArchProjects = () => {
                                                 {project.location} — {project.year}
                                             </span>
                                         </div>
-                                        <h3 className="text-3xl font-bold text-slate-900 group-hover:text-[#8846CF] transition-colors">
+                                        <h3 className="text-3xl font-bold text-slate-900 group-hover:text-[#914694] transition-colors">
+
                                             {project.title}
                                         </h3>
                                         <p className="text-slate-500 text-lg leading-relaxed line-clamp-2">

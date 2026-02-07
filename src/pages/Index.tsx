@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import GlobalTrust from '@/components/GlobalTrust';
 import About from '@/components/About';
 import Services from '@/components/Services';
 import RevitWorkflows from '@/components/RevitWorkflows';
@@ -15,6 +16,7 @@ const Index = () => {
       <Navbar />
       <main>
         <Hero />
+        <GlobalTrust />
         <About />
         <Services />
         <RevitWorkflows />

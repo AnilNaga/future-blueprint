@@ -11,45 +11,49 @@ const contactOptions = [
         title: 'Chat to sales',
         description: 'Speak to our friendly team.',
         buttonText: 'Chat to sales',
-        href: 'mailto:chat@jitheshtech.com',
+        href: 'mailto:jagadish@jiteshenggsolutions.com',
         iconBg: 'bg-indigo-50/30',
-        color: 'rgb(136, 70, 207)',
+        color: 'rgb(145, 70, 148)',
+
     },
     {
         icon: HelpCircle,
         title: 'Chat to support',
         description: "We're here to help.",
         buttonText: 'Chat to support',
-        href: 'mailto:support@jitheshtech.com',
+        href: 'mailto:jagadish@jiteshenggsolutions.com',
         iconBg: 'bg-indigo-50/30',
-        color: 'rgb(136, 70, 207)',
+        color: 'rgb(145, 70, 148)',
+
     },
     {
         icon: MapPin,
         title: 'Visit us',
-        description: 'India & International office HQ.',
+        description: '104, 1st floor, Down Town Mall, Lakdikapul, beside Lotus Children\'s Hospital, Hyderabad.',
         buttonText: 'Get directions',
-        href: 'https://maps.app.goo.gl/JrtfBRtCQz7PB6js8',
+        href: 'https://maps.app.goo.gl/qgeyuJBaJV11BZ5i6',
         iconBg: 'bg-indigo-50/30',
-        color: 'rgb(136, 70, 207)',
+        color: 'rgb(145, 70, 148)',
+
     },
     {
         icon: MessageCircle,
         title: 'WhatsApp',
         description: 'Chat with us on WhatsApp.',
         buttonText: 'Message us',
-        href: 'https://wa.me/911234567890?text=Hello!%20I\'m%20interested%20in%20your%20services.',
+        href: 'https://wa.me/918297744344?text=Hello!%20I\'m%20interested%20in%20your%20services.',
         iconBg: 'bg-emerald-50/30',
         color: 'rgb(16, 185, 129)',
     },
     {
         icon: Phone,
         title: 'Call us',
-        description: '+91 12345 67890',
+        description: '+91 82977 44344',
         buttonText: 'Call our team',
-        href: 'tel:+911234567890',
+        href: 'tel:+918297744344',
         iconBg: 'bg-indigo-50/30',
-        color: 'rgb(136, 70, 207)',
+        color: 'rgb(145, 70, 148)',
+
     },
 ];
 
@@ -79,18 +83,114 @@ const ContactPage = () => {
     return (
         <div className="min-h-screen bg-white">
             <Navbar />
-            <main className="pt-32 pb-24">
-                <div className="max-w-[1280px] mx-auto px-6 md:px-8">
-                    {/* Header Section */}
-                    <div className="text-center mb-16 md:mb-24">
-                        <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-6" style={{ color: 'rgb(136, 70, 207)' }}>
-                            Get in touch
-                        </h1>
-                        <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-normal">
-                            Ready to help your company scale faster? Let’s chat about how we can help.
-                        </p>
-                    </div>
 
+            {/* 🎥 CONTACT LANDING HERO (Premium Refined) */}
+            <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
+                {/* Background Image with Dark Brand Tinted Overlay */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                    <div
+                        className="absolute inset-0 bg-cover bg-center transition-transform duration-[20s] hover:scale-110"
+                        style={{
+                            backgroundImage: 'url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop")',
+                        }}
+                    ></div>
+                    {/* Sophisticated Dynamic Tinted Overlay (Cycles through requested colors) */}
+                    <motion.div
+                        animate={{
+                            backgroundColor: [
+                                'rgb(163, 157, 70)', // Gold/Olive
+                                'rgb(45, 60, 74)',   // Dark Blue/Grey
+                                'rgb(171, 124, 63)', // Bronze
+                                'rgb(29, 85, 128)',  // Deep Blue
+                                'rgb(163, 157, 70)'  // Loop back
+                            ]
+                        }}
+                        transition={{
+                            duration: 12, // 3 seconds per color (4 colors * 3s)
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="absolute inset-0 mix-blend-multiply opacity-80"
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/20 to-black/90"></div>
+
+                    {/* Subtle Engineering Elements (Glows & Grid) */}
+                    <motion.div
+                        animate={{
+                            opacity: [0.1, 0.2, 0.1],
+                            scale: [1, 1.2, 1],
+                            backgroundColor: [
+                                'rgba(163, 157, 70, 0.2)',
+                                'rgba(29, 85, 128, 0.2)',
+                                'rgba(163, 157, 70, 0.2)'
+                            ]
+                        }}
+                        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full rounded-full blur-[120px]"
+                    />
+
+                    <div
+                        className="absolute inset-0 opacity-[0.05]"
+                        style={{
+                            backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+                            backgroundSize: '100px 100px'
+                        }}
+                    />
+                </div>
+
+                <div className="relative z-10 container mx-auto px-6 text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1 }}
+                    >
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="inline-block px-5 py-2 mb-8 rounded-full bg-white/10 border border-white/20 backdrop-blur-md shadow-2xl"
+                        >
+                            <span className="text-[11px] md:text-xs font-bold uppercase tracking-[0.4em] text-white">Expert Consultancy</span>
+                        </motion.div>
+
+                        <h1 className="text-5xl md:text-8xl font-black tracking-tight mb-8 leading-[1.05] text-white">
+                            Let's Build Your <br />
+                            <span className="text-[#914694] drop-shadow-[0_0_20px_rgba(145,70,148,0.4)]">Digital Future</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-white/80 font-medium mb-16 max-w-4xl mx-auto leading-relaxed drop-shadow-sm">
+                            Whether you're starting a new project or transforming an entire enterprise,<br className="hidden md:block" />
+                            our BIM experts are ready to lead the way.
+                        </p>
+
+                        <div className="flex flex-wrap justify-center gap-12 md:gap-24 mb-20">
+                            {[
+                                { label: "Fast Response", desc: "Within 24 Hours" },
+                                { label: "Expert Guidance", desc: "Senior BIM Leads" },
+                                { label: "Global Standards", desc: "ISO Compliant" }
+                            ].map((item, i) => (
+                                <div key={i} className="flex flex-col items-center group cursor-default">
+                                    <span className="text-white font-black text-2xl mb-1 transition-colors group-hover:text-[#914694]">{item.label}</span>
+                                    <span className="text-white/50 text-xs font-bold uppercase tracking-widest">{item.desc}</span>
+                                    <div className="w-12 h-0.5 bg-[#914694] mt-4 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center" />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Scroll Guide (White variant) */}
+                        <motion.div
+                            animate={{ y: [0, 10, 0] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="flex flex-col items-center gap-3 text-white/40"
+                        >
+                            <span className="text-[10px] font-bold uppercase tracking-[0.2em]">Scroll to start</span>
+                            <ChevronDown size={24} />
+                        </motion.div>
+                    </motion.div>
+                </div>
+            </section>
+
+            <main className="pb-24">
+                <div className="max-w-[1280px] mx-auto px-6 md:px-8">
                     {/* Contact Options Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-32 relative z-[70]">
                         {contactOptions.map((option) => {
@@ -101,20 +201,20 @@ const ContactPage = () => {
                                     href={option.href}
                                     target={isExternal ? "_blank" : undefined}
                                     rel={isExternal ? "noopener noreferrer" : undefined}
-                                    className="bg-white border border-gray-200 rounded-[12px] p-6 shadow-sm flex flex-col items-start gap-4 hover:border-indigo-400 hover:shadow-md transition-all group cursor-pointer relative z-10 block pointer-events-auto"
+                                    className="bg-white border border-gray-200 rounded-[12px] p-6 shadow-sm flex flex-col items-start gap-4 hover:border-[#914694]/40 hover:shadow-md transition-all group cursor-pointer relative z-10 block pointer-events-auto"
                                     style={{ textDecoration: 'none' }}
                                 >
-                                    <div className={`w-12 h-12 ${option.iconBg} rounded-lg flex items-center justify-center border border-indigo-100/50 transition-colors group-hover:bg-indigo-50/50`}>
+                                    <div className={`w-12 h-12 ${option.iconBg} rounded-lg flex items-center justify-center border border-[#914694]/10 transition-colors group-hover:bg-[#914694]/5`}>
                                         <option.icon className="w-6 h-6" style={{ color: option.color }} />
                                     </div>
                                     <div className="w-full">
-                                        <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">{option.title}</h3>
+                                        <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#914694] transition-colors">{option.title}</h3>
                                         <p className="text-base text-slate-600 mb-6 font-normal leading-relaxed">
                                             {option.description}
                                         </p>
                                     </div>
                                     <div
-                                        className="mt-auto inline-flex items-center px-4 py-2 text-base font-semibold text-slate-900 border border-gray-300 rounded-lg group-hover:bg-indigo-50 group-hover:border-indigo-300 transition-colors"
+                                        className="mt-auto inline-flex items-center px-4 py-2 text-base font-semibold text-slate-900 border border-gray-300 rounded-lg group-hover:bg-[#914694]/5 group-hover:border-[#914694]/30 transition-colors"
                                     >
                                         {option.buttonText}
                                     </div>
@@ -144,7 +244,7 @@ const ContactPage = () => {
                                         value={formData.firstName}
                                         onChange={handleChange}
                                         placeholder="First name"
-                                        className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
+                                        className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-[#914694]/5 focus:border-[#914694]/30 transition-all placeholder:text-gray-400 font-normal shadow-sm"
                                     />
                                 </div>
                                 <div className="space-y-2">
@@ -157,7 +257,7 @@ const ContactPage = () => {
                                         value={formData.lastName}
                                         onChange={handleChange}
                                         placeholder="Last name"
-                                        className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
+                                        className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-[#914694]/5 focus:border-[#914694]/30 transition-all placeholder:text-gray-400 font-normal shadow-sm"
                                     />
                                 </div>
                             </div>
@@ -172,7 +272,7 @@ const ContactPage = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     placeholder="you@company.com"
-                                    className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal shadow-sm"
+                                    className="w-full h-12 px-4 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-[#914694]/5 focus:border-[#914694]/30 transition-all placeholder:text-gray-400 font-normal shadow-sm"
                                 />
                             </div>
 
@@ -190,7 +290,7 @@ const ContactPage = () => {
                                         value={formData.phone}
                                         onChange={handleChange}
                                         placeholder="+91 (555) 000-0000"
-                                        className="flex-1 h-12 px-4 rounded-r-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all placeholder:text-gray-400 font-normal"
+                                        className="flex-1 h-12 px-4 rounded-r-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-[#914694]/5 focus:border-[#914694]/30 transition-all placeholder:text-gray-400 font-normal"
                                     />
                                 </div>
                             </div>
@@ -205,7 +305,7 @@ const ContactPage = () => {
                                     onChange={handleChange}
                                     placeholder="Leave us a message..."
                                     rows={5}
-                                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-300 transition-all resize-none placeholder:text-gray-400 font-normal leading-relaxed shadow-sm"
+                                    className="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-slate-900 focus:outline-none focus:ring-4 focus:ring-[#914694]/5 focus:border-[#914694]/30 transition-all resize-none placeholder:text-gray-400 font-normal leading-relaxed shadow-sm"
                                 />
                             </div>
 
@@ -213,7 +313,8 @@ const ContactPage = () => {
                                 type="submit"
                                 disabled={isSubmitting}
                                 className="w-full h-14 text-white rounded-lg font-bold text-lg transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed group shadow-sm active:scale-[0.99] mt-8"
-                                style={{ backgroundColor: 'rgb(136, 70, 207)' }}
+                                style={{ backgroundColor: 'rgb(145, 70, 148)' }}
+
                             >
                                 {isSubmitting ? (
                                     <Loader2 className="w-6 h-6 animate-spin" />

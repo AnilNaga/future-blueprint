@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { GraduationCap, FolderOpen, UserCheck, Award, Briefcase, Star } from "lucide-react";
 import { useScrollAnimation, fadeInUpVariants, staggerContainerVariants } from "@/hooks/useScrollAnimation";
 
@@ -26,8 +27,9 @@ const InternshipJourney = () => {
                 >
                     <motion.p
                         variants={fadeInUpVariants}
-                        className="text-[13px] font-bold tracking-[0.2em] text-[#8846CF] uppercase mb-4"
-                        style={{ color: 'rgb(136, 70, 207)' }}
+                        className="text-[13px] font-bold tracking-[0.2em] text-[#914694] uppercase mb-4"
+                        style={{ color: 'rgb(145, 70, 148)' }}
+
                     >
                         Internship → Full-Time Journey
                     </motion.p>
@@ -94,7 +96,8 @@ const InternshipJourney = () => {
                                 Structured learning designed as a professional entry point, not just classroom training.
                             </p>
                         </div>
-                        <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#8846CF]">
+                        <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#914694]">
+
                             <span>Step 01</span>
                         </div>
                     </motion.div>
@@ -133,7 +136,8 @@ const InternshipJourney = () => {
                                 Work on real-world architecture & engineering projects under guidance.
                             </p>
                         </div>
-                        <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#8846CF]">
+                        <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#914694]">
+
                             <span>Step 02</span>
                         </div>
                     </motion.div>
@@ -168,7 +172,8 @@ const InternshipJourney = () => {
                                 One-on-one guidance from senior engineers with evaluations.
                             </p>
                         </div>
-                        <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#8846CF]">
+                        <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#914694]">
+
                             <span>Step 03</span>
                         </div>
                     </motion.div>
@@ -183,7 +188,7 @@ const InternshipJourney = () => {
                             <p className="text-slate-500 leading-relaxed max-w-sm mb-6">
                                 Rigorous assessment of technical accuracy, process adherence, and collaboration.
                             </p>
-                            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#8846CF]">
+                            <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-[#914694]">
                                 <span>Step 04</span>
                             </div>
                         </div>
@@ -247,13 +252,15 @@ const InternshipJourney = () => {
                             <p className="text-slate-400 text-lg mb-10 leading-relaxed">
                                 Our ultimate goal is for you to lead. Exceptional performers transition into permanent roles with international engineering exposure.
                             </p>
-                            <motion.button
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                className="bg-white text-slate-900 px-10 py-4 rounded-full font-bold text-lg shadow-2xl hover:bg-slate-50 transition-colors"
-                            >
-                                Build Your Future
-                            </motion.button>
+                            <Link to="/contact">
+                                <motion.button
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    className="bg-white text-slate-900 px-10 py-4 rounded-full font-bold text-lg shadow-2xl hover:bg-slate-50 transition-colors"
+                                >
+                                    Build Your Future
+                                </motion.button>
+                            </Link>
                         </div>
                     </motion.div>
                 </motion.div>
